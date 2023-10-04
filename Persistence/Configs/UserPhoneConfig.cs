@@ -19,7 +19,7 @@ public class UserPhoneConfig : BaseEntityConfig<UserPhone>
             .HasForeignKey(e => e.IdUser);
 
         builder.HasOne(e => e.CountryCode)
-            .WithMany()
+            .WithMany(cc => cc.UserPhones)
             .HasForeignKey(e => e.IdCountryCode);
     }
 }
