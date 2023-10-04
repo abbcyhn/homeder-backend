@@ -1,0 +1,18 @@
+﻿namespace Domain.Entities;
+
+public class ApartmentSecurityDetail : BaseEntity
+{
+    public int IdApartment { get; set; }
+    public bool? HasAlarmSystem { get; set; }
+    public bool? HasSecurityDoors { get; set; }
+    public bool? HasCCTV { get; set; }
+    public bool? HasConcierge { get; set; }
+    public bool? HasSecurityShutters { get; set; }
+    public bool? HasFireAlarm { get; set; }
+    public bool? HasSmokeDetectors { get; set; }
+    public bool? HasGasDetectors { get; set; }
+    public bool? HasFloodDetectors { get; set; }
+    public bool? HasSafeRoom { get; set; }
+
+    public Apartment Apartment { get; set; }
+}
