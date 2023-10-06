@@ -20,6 +20,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapHealthChecks("/health-check");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
