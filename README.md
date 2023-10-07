@@ -1,11 +1,27 @@
-### Build docker image
+# Homeder Backend
 
-`! All commands should be executed from the root of the solution !`
-```shell
-docker build -t homeder-backend-webapi:latest -f WebAPI/Dockerfile .
+## Backend Deployment
+
+To deploy backend, follow the steps below:
+
+### Clone the repository
+
+```bash
+git clone git@github.com:abbcyhn/homeder-backend.git
+cd homeder-backend
 ```
 
-### Run container
-```shell
-docker run -d -p 8080:80 --name hmdr-be-webapi homeder-backend-webapi:latest
+### Deploy the backend
+
+Once you have cloned the repository and navigated to the project directory, open your command prompt (cmd) or terminal and execute the following commands:
+
+
+```bash
+# Create homeder-backend image
+docker build -t homeder-backend:latest .
+```
+
+```bash
+# Create homeder-backend container
+docker run -d -p 80:80 --name homeder-backend homeder-backend:latest
 ```
