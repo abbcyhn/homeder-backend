@@ -4,21 +4,24 @@ using Application.Commons;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using WebAPI.Auth;
+using WebAPI.Errors;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHealthChecks();
 
 builder.Services.AddControllers();
+builder.Services.AddSingleton<ProblemDetailsFactory, HomederProblemDetailsFactory>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresqlDocker")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresqlDocker")));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
@@ -93,6 +96,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler("/error");
 
 app.MapHealthChecks("/health-check");
 
