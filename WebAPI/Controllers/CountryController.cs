@@ -2,12 +2,15 @@ using Application.Regions.Features.GetAllCountries;
 using Application.Regions.Features.GetCountryById;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
 
-[Route("api/countries")]
 [ApiController]
+[Route("api/countries")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class CountryController : ControllerBase
 {
     private readonly IMapper _mapper;
