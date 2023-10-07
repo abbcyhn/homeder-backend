@@ -1,5 +1,8 @@
+using Application;
+using Application.Commons;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresqlDocker")));
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
+
+builder.Services.AddAutoMapper(typeof(DependencyInjection).Assembly);
 
 var app = builder.Build();
 
