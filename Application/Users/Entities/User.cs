@@ -8,7 +8,7 @@ public class User : ACEI_Entity
     public string Name { get; set; }
     public string Surname { get; set; }
     public DateTime? Birthdate { get; set; }
-    public string PhotoUrl { get; set; }
+    public string? PhotoUrl { get; set; }
     public int IdRole { get; set; }
     public int IdCitizenship { get; set; }
 
