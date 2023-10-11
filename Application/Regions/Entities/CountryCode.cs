@@ -1,7 +1,7 @@
 ﻿using Application.Commons.Entities;
 using Application.Users.Entities;
 
-namespace Application.Regions.Configs;
+namespace Application.Regions.Entities;
 
 public class CountryCode : AIV_Entity
 {

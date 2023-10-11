@@ -1,5 +1,5 @@
 ﻿using Application.Commons.Entities;
-using Application.Regions.Configs;
+using Application.Regions.Entities;
 
 namespace Application.Users.Entities;
 
