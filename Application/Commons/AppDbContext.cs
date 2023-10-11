@@ -28,6 +28,10 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        if (File.Exists("logs.txt"))
+        {
+            File.Delete("logs.txt");
+        }
         var loggerFactory = LoggerFactory.Create(builder =>
         {
             builder.AddProvider(new FileLoggerProvider("logs.txt"));
