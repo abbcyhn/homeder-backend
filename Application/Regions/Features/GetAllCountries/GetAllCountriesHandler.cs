@@ -1,5 +1,5 @@
 using Application.Commons;
-using Application.Regions.Configs;
+using Application.Regions.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

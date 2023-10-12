@@ -1,4 +1,4 @@
-using Application.Regions.Configs;
+using Application.Regions.Entities;
 using AutoMapper;
 
 namespace Application.Regions.Features.GetAllCountries;

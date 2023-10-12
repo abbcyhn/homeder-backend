@@ -1,7 +1,6 @@
 ﻿using Application.Commons.Entities;
-using Application.Regions.Entities;
 
-namespace Application.Regions.Configs;
+namespace Application.Regions.Entities;
 
 public class Country : AIV_Entity
 {

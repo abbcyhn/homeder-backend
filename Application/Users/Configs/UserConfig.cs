@@ -14,7 +14,8 @@ public class UserConfig : ACEI_EntityConfig<User>
         builder.ToTable("USERS");
         builder.Property(e => e.Name).IsRequired();
         builder.Property(e => e.Surname).IsRequired();
-        builder.Property(e => e.Birthdate);
+        // TODO: make update to database script file also
+        builder.Property(e => e.Birthdate).HasColumnType("date");
         builder.Property(e => e.PhotoUrl);
         builder.Property(e => e.IdRole).IsRequired();
 
