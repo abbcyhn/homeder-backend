@@ -1,11 +1,9 @@
 using Application;
 using Application.Commons;
 using Application.Commons.Services.TokenService;
-using Application.Commons.Utilities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Auth;
 using WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,10 +24,10 @@ builder.Services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly)
 
 builder.Services.AddAutoMapper(typeof(DependencyInjection).Assembly);
 
-var jwtSettings = new JwtSettings();
-builder.Configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(nameof(JwtSettings)));
-builder.Services.AddAuthenticationConfigs(jwtSettings);
+var authSetting = new AuthSetting();
+builder.Configuration.GetSection(nameof(authSetting)).Bind(authSetting);
+builder.Services.Configure<AuthSetting>(builder.Configuration.GetSection(nameof(authSetting)));
+builder.Services.AddAuthenticationConfigs(authSetting);
 
 builder.Services.AddSwaggerConfigs();
 
