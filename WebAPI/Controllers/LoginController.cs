@@ -1,7 +1,9 @@
 using Application.Users.Features.CreateUser;
+using Application.Users.Features.UpdateUserPhoto;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Extensions;
 
 namespace WebAPI.Controllers;
 
@@ -28,4 +30,17 @@ public class LoginController : ControllerBase
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response.HomederToken);
     }
+
+    // MOTE TO USERCONTROLLER
+    [HttpPost]
+    [Route("{userId}/photo")]
+    public async Task<IActionResult> UpdateUserPhoto([FromRoute] int userId, UpdateUserPhotoInput input, CancellationToken cancellationToken)
+    {
+        var request = _mapper.Map<UpdateUserPhotoRequest>(input);
+        request.UserId = userId;
+        request.LoggedUserId = HttpContext.GetUserId();
+        request.HostUrl = HttpContext.Request.Host.Value;
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response.PhotoUrl);
+    }    
 }

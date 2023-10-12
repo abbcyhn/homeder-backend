@@ -5,6 +5,7 @@ using Application.Users.Entities;
 using Application.Users.Features.UpdateUserPhoto;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Features.CreateUser;
 
@@ -29,12 +30,19 @@ public class CreateUserHandler : IRequestHandler<CreateUserRequest, CreateUserRe
     {
         var googleTokenData = _tokenService.DecodeGoogleToken(request.GoogleToken);
 
-        var user = _mapper.Map<User>(googleTokenData);
-        await _ctx.GetEntity<User>().AddAsync(user, cancellationToken);
-        await _ctx.SaveChangesAsync(cancellationToken);
+        var user = _ctx.GetEntity<User>()
+            .Include(u => u.UserEmails)
+            .FirstOrDefault(u => u.UserEmails.Any(e => e.Email == googleTokenData.Email));
 
-        user.PhotoUrl = await SavePhoto(user.Id, googleTokenData.PhotoUrl, request.HostUrl, cancellationToken);
-        await _ctx.SaveChangesAsync(cancellationToken);
+        if (user == null)
+        {
+            user = _mapper.Map<User>(googleTokenData);
+            await _ctx.GetEntity<User>().AddAsync(user, cancellationToken);
+            await _ctx.SaveChangesAsync(cancellationToken);
+
+            user.PhotoUrl = await SavePhoto(user.Id, googleTokenData.PhotoUrl, request.HostUrl, cancellationToken);
+            await _ctx.SaveChangesAsync(cancellationToken);
+        }
 
         var homederTokenData = _mapper.Map<HomederTokenData>((user, googleTokenData.Email));
         string homederToken = _tokenService.GenerateHomederToken(homederTokenData);
