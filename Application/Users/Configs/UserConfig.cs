@@ -17,14 +17,9 @@ public class UserConfig : ACEI_EntityConfig<User>
         builder.Property(e => e.Birthdate);
         builder.Property(e => e.PhotoUrl);
         builder.Property(e => e.IdRole).IsRequired();
-        builder.Property(e => e.IdCitizenship).IsRequired();
 
         builder.HasOne(e => e.UserRole)
             .WithMany()
             .HasForeignKey(e => e.IdRole);
-
-        builder.HasOne(e => e.Citizenship)
-            .WithMany()
-            .HasForeignKey(e => e.IdCitizenship);
     }
 }

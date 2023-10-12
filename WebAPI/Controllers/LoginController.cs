@@ -1,28 +1,31 @@
+using Application.Users.Features.CreateUser;
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Auth;
 
 namespace WebAPI.Controllers;
 
+[ApiController]
 [Route("api/login")]
 public class LoginController : ControllerBase
 {
-    private readonly JwtDecoder _jwtDecoder;
-    private readonly JwtGenerator _jwtGenerator;
+    private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
-    public LoginController(JwtDecoder jwtDecoder, JwtGenerator jwtGenerator)
+    public LoginController(IMapper mapper, IMediator mediator)
     {
-        _jwtDecoder = jwtDecoder;
-        _jwtGenerator = jwtGenerator;
+        _mapper = mapper;
+        _mediator = mediator;
     }
 
 
     [HttpPost]
-    public IActionResult LoginViaGoogle([FromBody] string googleToken)
+    [Route("")]
+    public async Task<IActionResult> LoginViaGoogle([FromBody] CreateUserInput input, CancellationToken cancellationToken)
     {
-        // TODO: validate google token
-        var googleTokenData = _jwtDecoder.DecodeGoogleToken(googleToken);
-        // TODO: user should be created here
-        string jwtToken = _jwtGenerator.Generate(0, googleTokenData.Name);
-        return Ok(jwtToken);
+        var request = _mapper.Map<CreateUserRequest>(input);
+        request.HostUrl = HttpContext.Request.Host.Value;
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response.HomederToken);
     }
 }

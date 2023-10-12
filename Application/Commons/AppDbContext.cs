@@ -1,4 +1,5 @@
-﻿using Application.Commons.Utilities;
+﻿using Application.Commons.Entities;
+using Application.Commons.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -41,5 +42,34 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+    }
+
+    public override int SaveChanges()
+    {
+        SetDefaultValues();
+        return base.SaveChanges();
+    }
+
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+    {
+        SetDefaultValues();
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void SetDefaultValues()
+    {
+        var entries = ChangeTracker.Entries();
+
+        foreach (var entityEntry in entries)
+        {
+            if (entityEntry.Entity is ICreatableEntity && entityEntry.State == EntityState.Added)
+            {
+                ((ICreatableEntity)entityEntry.Entity).CreateDate = DateTime.UtcNow;
+            }
+            if (entityEntry.Entity is IEditableEntity && entityEntry.State == EntityState.Modified)
+            {
+                ((IEditableEntity)entityEntry.Entity).EditDate = DateTime.UtcNow;
+            }
+        }
     }
 }

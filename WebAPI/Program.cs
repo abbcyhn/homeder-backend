@@ -1,13 +1,14 @@
 using System.Text;
 using Application;
 using Application.Commons;
+using Application.Commons.Services.TokenService;
+using Application.Commons.Utilities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using WebAPI.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,12 +29,12 @@ builder.Services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly)
 
 builder.Services.AddAutoMapper(typeof(DependencyInjection).Assembly);
 
-var jwtSettings = new JwtSettings();
-builder.Configuration.GetSection(nameof(JwtSettings)).Bind(jwtSettings);
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(nameof(JwtSettings)));
+var authSetting = new AuthSetting();
+builder.Configuration.GetSection(nameof(authSetting)).Bind(authSetting);
+builder.Services.Configure<AuthSetting>(builder.Configuration.GetSection(nameof(authSetting)));
 
-builder.Services.AddSingleton<JwtDecoder>();
-builder.Services.AddSingleton<JwtGenerator>();
+builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddSingleton<IConverterUtility, ConverterUtility>();
 
 builder.Services.AddAuthentication(x => 
 {
@@ -47,7 +48,7 @@ builder.Services.AddAuthentication(x =>
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(authSetting.HomederTokenSecret)),
         ValidateIssuer = false,
         ValidateAudience = false,
         RequireExpirationTime = false,
