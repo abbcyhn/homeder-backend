@@ -1,8 +1,9 @@
 ﻿using System.Text;
+using Application.Commons.Services.TokenService;
+using Application.Commons.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using WebAPI.Auth;
 
 namespace WebAPI.Extensions;
 
@@ -41,10 +42,10 @@ public static class ServiceCollectionExtensions
         });
     }
 
-    public static void AddAuthenticationConfigs(this IServiceCollection services, JwtSettings jwtSettings)
+    public static void AddAuthenticationConfigs(this IServiceCollection services, AuthSetting authSettings)
     {
-        services.AddSingleton<JwtDecoder>();
-        services.AddSingleton<JwtGenerator>();
+        services.AddSingleton<ITokenService, TokenService>();
+        services.AddSingleton<IConverterUtility, ConverterUtility>();
 
         services.AddAuthentication(x =>
             {
@@ -58,7 +59,7 @@ public static class ServiceCollectionExtensions
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(authSettings.HomederTokenSecret)),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     RequireExpirationTime = false,

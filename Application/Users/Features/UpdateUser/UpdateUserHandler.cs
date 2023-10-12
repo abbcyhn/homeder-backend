@@ -25,11 +25,12 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, bool>
             .Include(x=>x.UserPhones)
             .FirstOrDefaultAsync(x=>x.Id == request.Id);
 
+        if (user == null) return false;
+
         user.Name = request.Name;
         user.Surname = request.Surname;
         user.Birthdate = request.Birthdate;
         user.IdRole = request.IdRole;
-        user.IdCitizenship = request.IdCitizenship;
         user.EditDate = DateTime.UtcNow;
 
         user.UserDetails.IdUserType = request.IdUserType;
