@@ -14,6 +14,7 @@ public class UserDetailsConfig : ACE_EntityConfig<UserDetails>
         builder.ToTable("USER_DETAILS");
         builder.HasKey(e => e.IdUser);
         builder.Property(e => e.IdUserType).IsRequired();
+        builder.Property(e => e.IdCitizenship).IsRequired();
         builder.Property(e => e.NoOfPeople).IsRequired();
         builder.Property(e => e.IsSmoker).IsRequired();
         builder.Property(e => e.HasChild).IsRequired();
@@ -30,5 +31,9 @@ public class UserDetailsConfig : ACE_EntityConfig<UserDetails>
         builder.HasOne(e => e.UserType)
             .WithMany()
             .HasForeignKey(e => e.IdUserType);
+
+        builder.HasOne(e => e.Citizenship)
+            .WithMany()
+            .HasForeignKey(e => e.IdCitizenship);
     }
 }

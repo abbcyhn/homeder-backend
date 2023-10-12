@@ -12,8 +12,10 @@ public class GetCountryByIdInputValidator : AbstractValidator<GetCountryByIdInpu
     {
         _ctx = ctx;
 
-        RuleFor(t => t.Id).NotEmpty().WithMessage("Id can not be null");
-        RuleFor(t => t.Id).Must(BeExists).WithMessage("Country does not exist");
+        RuleFor(t => t.Id)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty().WithMessage("Id can not be null")
+            .Must(BeExists).WithMessage("Country does not exist");
     }
 
     private bool BeExists(int id)
