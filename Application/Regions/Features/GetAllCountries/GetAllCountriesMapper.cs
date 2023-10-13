@@ -1,3 +1,4 @@
+using Application.Commons.Dtos;
 using Application.Regions.Entities;
 using AutoMapper;
 
@@ -7,8 +8,8 @@ public class GetAllCountriesMapper : Profile
 {
     public GetAllCountriesMapper()
     {
-        CreateMap<Country, GetAllCountriesDto>();
-        CreateMap<List<Country>, GetAllCountriesResponse>()
-            .ForMember(dest => dest.Countries, opt => opt.MapFrom(src => src));
+        CreateMap<Country, GetLibDto>();
+        CreateMap<List<Country>, GetAllLibResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }
 }

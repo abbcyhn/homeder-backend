@@ -1,4 +1,5 @@
 using Application.Commons;
+using Application.Commons.Dtos;
 using Application.Regions.Entities;
 using AutoMapper;
 using MediatR;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Regions.Features.GetAllCountries;
 
-public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesRequest, GetAllCountriesResponse>
+public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesRequest, GetAllLibResponse>
 {
     private IMapper _mapper;
     private readonly AppDbContext _ctx;
@@ -18,11 +19,11 @@ public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesRequest, Ge
 
     }
 
-    public async Task<GetAllCountriesResponse> Handle(GetAllCountriesRequest request, CancellationToken cancellationToken)
+    public async Task<GetAllLibResponse> Handle(GetAllCountriesRequest request, CancellationToken cancellationToken)
     {
         var countries = await _ctx.GetEntity<Country>()
             .ToListAsync(cancellationToken);
 
-        return _mapper.Map<GetAllCountriesResponse>(countries);
+        return _mapper.Map<GetAllLibResponse>(countries);
     }
 }
