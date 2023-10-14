@@ -8,7 +8,6 @@ To deploy backend, follow the steps below:
 
 ```bash
 git clone git@github.com:abbcyhn/homeder-backend.git
-cd homeder-backend
 ```
 
 ### Deploy the backend
@@ -17,11 +16,9 @@ Once you have cloned the repository and navigated to the project directory, open
 
 
 ```bash
-# Create homeder-backend image
 docker build -t homeder-backend:latest .
 ```
 
 ```bash
-# Create homeder-backend container
 docker run -d -p 80:80 --name homeder-backend homeder-backend:latest
 ```
