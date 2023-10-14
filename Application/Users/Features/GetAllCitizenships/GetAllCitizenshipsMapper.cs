@@ -2,7 +2,7 @@
 using Application.Regions.Entities;
 using AutoMapper;
 
-namespace Application.Regions.Features.GetAllCitizenships;
+namespace Application.Users.Features.GetAllCitizenships;
 
 public class GetAllCitizenshipsMapper : Profile
 {

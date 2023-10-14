@@ -44,9 +44,6 @@ public static class ServiceCollectionExtensions
 
     public static void AddAuthenticationConfigs(this IServiceCollection services, AuthSetting authSettings)
     {
-        services.AddSingleton<ITokenService, TokenService>();
-        services.AddSingleton<IConverterUtility, ConverterUtility>();
-
         services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
