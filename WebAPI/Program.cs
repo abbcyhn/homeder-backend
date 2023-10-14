@@ -1,6 +1,7 @@
 using Application;
 using Application.Commons;
 using Application.Commons.Services.TokenService;
+using Application.Commons.Utilities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,10 @@ builder.Services.AddAutoMapper(typeof(DependencyInjection).Assembly);
 var authSetting = new AuthSetting();
 builder.Configuration.GetSection(nameof(authSetting)).Bind(authSetting);
 builder.Services.Configure<AuthSetting>(builder.Configuration.GetSection(nameof(authSetting)));
+
+builder.Services.AddSingleton<IConverterUtility, ConverterUtility>();
+builder.Services.AddSingleton<ITokenService, TokenService>();
+
 builder.Services.AddAuthenticationConfigs(authSetting);
 
 builder.Services.AddSwaggerConfigs();
