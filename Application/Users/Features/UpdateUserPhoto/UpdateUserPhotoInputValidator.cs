@@ -1,5 +1,4 @@
 using FluentValidation;
-using SixLabors.ImageSharp;
 
 namespace Application.Users.Features.UpdateUserPhoto;
 

@@ -1,3 +1,4 @@
+using Application.Commons.Dtos;
 using Application.Regions.Entities;
 using AutoMapper;
 
@@ -8,6 +9,6 @@ public class GetCountryByIdMapper : Profile
     public GetCountryByIdMapper() 
     {
         CreateMap<GetCountryByIdInput, GetCountryByIdRequest>();
-        CreateMap<Country, GetCountryByIdResponse>();
+        CreateMap<Country, GetLibResponse>();
     }
 }
