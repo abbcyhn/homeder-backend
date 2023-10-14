@@ -5,7 +5,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Regions.Features.GetAllCitizenships;
+namespace Application.Users.Features.GetAllCitizenships;
 
 public class GetAllCitizenshipsHandler : IRequestHandler<GetAllCitizenshipsRequest, GetAllLibResponse>
 {
@@ -16,7 +16,6 @@ public class GetAllCitizenshipsHandler : IRequestHandler<GetAllCitizenshipsReque
     {
         _ctx = ctx;
         _mapper = mapper;
-
     }
 
     public async Task<GetAllLibResponse> Handle(GetAllCitizenshipsRequest request, CancellationToken cancellationToken)

@@ -1,7 +1,7 @@
 ﻿using Application.Commons.Dtos;
 using MediatR;
 
-namespace Application.Regions.Features.GetAllCitizenships;
+namespace Application.Users.Features.GetAllCitizenships;
 
 public class GetAllCitizenshipsRequest : IRequest<GetAllLibResponse>
 {
