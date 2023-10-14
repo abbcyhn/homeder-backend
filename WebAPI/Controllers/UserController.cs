@@ -2,10 +2,12 @@ using Application.Commons.Dtos;
 using Application.Users.Features.CreateUser;
 using Application.Users.Features.GetAllCitizenships;
 using Application.Users.Features.GetAllTypes;
+using Application.Users.Features.GetUserPhoto;
 using Application.Users.Features.UpdateUser;
 using Application.Users.Features.UpdateUserPhoto;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Extensions;
@@ -14,7 +16,7 @@ namespace WebAPI.Controllers;
 
 [ApiController]
 [Route("api/users")]
-// [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -28,7 +30,7 @@ public class UserController : ControllerBase
     
     [HttpPost]
     [AllowAnonymous]
-    public async Task<ActionResult<string>> LoginViaGoogle([FromBody] CreateUserInput input, CancellationToken cancellationToken)
+    public async Task<ActionResult<string>> CreateUser([FromBody] CreateUserInput input, CancellationToken cancellationToken)
     {
         var request = _mapper.Map<CreateUserRequest>(input);
         request.HostUrl = HttpContext.Request.Host.Value;
@@ -40,7 +42,7 @@ public class UserController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] UpdateUserInput updateUserInput)
+    public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserInput updateUserInput)
     {
         var request = _mapper.Map<UpdateUserRequest>(updateUserInput);
         request.Id = id;
@@ -52,6 +54,14 @@ public class UserController : ControllerBase
         }
         
         return Conflict();
+    }
+
+    [HttpGet("{userId}/photo")]
+    public async Task<IActionResult> GetUserPhoto(int userId, CancellationToken cancellationToken) 
+    {
+        var request = new GetUserPhotoRequest { UserId = userId, LoggedUserId = HttpContext.GetUserId() };
+        var response = await _mediator.Send(request, cancellationToken);
+        return File(response.UserPhoto, "image/png");
     }
 
     [HttpPost("{userId}/photo")]
