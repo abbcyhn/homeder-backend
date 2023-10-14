@@ -9,7 +9,7 @@ namespace Application.Regions.Features.GetCountryById;
 
 public class GetCountryByIdHandler : IRequestHandler<GetCountryByIdRequest, GetLibResponse>
 {
-    private IMapper _mapper;
+    private readonly IMapper _mapper;
     private readonly AppDbContext _ctx;
 
     public GetCountryByIdHandler(AppDbContext ctx, IMapper mapper)

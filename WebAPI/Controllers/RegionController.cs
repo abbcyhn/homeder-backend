@@ -1,4 +1,6 @@
+using Application.Commons.Dtos;
 using Application.Regions.Features.GetAllCountries;
+using Application.Regions.Features.GetAllCountryCodes;
 using Application.Regions.Features.GetCountryById;
 using AutoMapper;
 using MediatR;
@@ -21,7 +23,7 @@ public class RegionController : ControllerBase
     }
 
     [HttpGet("countries/{countryId}")]
-    public async Task<IActionResult> GetCountryById([FromRoute] GetCountryByIdInput input, CancellationToken cancellationToken)
+    public async Task<ActionResult<GetLibResponse>> GetCountryById([FromRoute] GetCountryByIdInput input, CancellationToken cancellationToken)
     {
         var request = _mapper.Map<GetCountryByIdRequest>(input);
         
@@ -31,9 +33,19 @@ public class RegionController : ControllerBase
     }
 
     [HttpGet("countries")]
-    public async Task<IActionResult> GetAllCountries(CancellationToken cancellationToken)
+    public async Task<ActionResult<GetAllLibResponse>> GetAllCountries(CancellationToken cancellationToken)
     {
         var request = new GetAllCountriesRequest();
+        
+        var response = await _mediator.Send(request, cancellationToken);
+        
+        return Ok(response);
+    }
+    
+    [HttpGet("country-codes")]
+    public async Task<ActionResult<GetAllLibResponse>> GetAllCountryCodes(CancellationToken cancellationToken)
+    {
+        var request = new GetAllCountryCodesRequest();
         
         var response = await _mediator.Send(request, cancellationToken);
         
