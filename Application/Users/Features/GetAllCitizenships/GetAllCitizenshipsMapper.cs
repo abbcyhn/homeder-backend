@@ -9,6 +9,7 @@ public class GetAllCitizenshipsMapper : Profile
     public GetAllCitizenshipsMapper()
     {
         CreateMap<Citizenship, GetLibDto>();
+        
         CreateMap<List<Citizenship>, GetAllLibResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }

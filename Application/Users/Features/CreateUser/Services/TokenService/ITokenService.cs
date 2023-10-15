@@ -1,4 +1,4 @@
-namespace Application.Commons.Services.TokenService;
+namespace Application.Users.Features.CreateUser.Services.TokenService;
 
 public interface ITokenService
 {

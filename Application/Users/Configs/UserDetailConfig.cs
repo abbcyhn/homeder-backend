@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Users.Configs;
 
-public class UserDetailsConfig : ACE_EntityConfig<UserDetails>
+public class UserDetailConfig : ACE_EntityConfig<UserDetail>
 {
-    public override void Configure(EntityTypeBuilder<UserDetails> builder)
+    public override void Configure(EntityTypeBuilder<UserDetail> builder)
     {
         base.Configure(builder);
 
@@ -25,8 +25,8 @@ public class UserDetailsConfig : ACE_EntityConfig<UserDetails>
         builder.Property(e => e.HasUmowaOkazionalny).IsRequired();
 
         builder.HasOne(e => e.User)
-            .WithOne(u => u.UserDetails)
-            .HasForeignKey<UserDetails>(e => e.IdUser);
+            .WithOne(u => u.UserDetail)
+            .HasForeignKey<UserDetail>(e => e.IdUser);
 
         builder.HasOne(e => e.UserType)
             .WithMany()

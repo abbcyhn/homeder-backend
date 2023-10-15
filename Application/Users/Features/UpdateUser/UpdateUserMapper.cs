@@ -14,9 +14,9 @@ public class UpdateUserMapper : Profile
 
         CreateMap<UpdateUserRequest, User>();
 
-        CreateMap<UpdateUserRequest, UserDetails>()
-            .ForMember(d=>d.NoOfPeople, o=>o.MapFrom(s=>s.NumberOfPeople))
-            .ForMember(d => d.IdUser, o => o.MapFrom(s => s.Id));
+        CreateMap<UpdateUserRequest, UserDetail>()
+            .ForMember(d => d.NoOfPeople, o => o.MapFrom(s => s.NumberOfPeople))
+            .ForMember(d => d.IdUser, o => o.MapFrom(s => s.UserId));
 
         CreateMap<UpdateUserRequest, UserPhone>();
     }

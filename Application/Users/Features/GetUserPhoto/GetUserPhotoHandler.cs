@@ -1,10 +1,16 @@
+using Application.Commons;
+using AutoMapper;
 using MediatR;
 
 namespace Application.Users.Features.GetUserPhoto;
 
-public class GetUserPhotoHandler : IRequestHandler<GetUserPhotoRequest, GetUserPhotoResponse>
+public class GetUserPhotoHandler : BaseRequestHandler<GetUserPhotoRequest, GetUserPhotoResponse>
 {
-    public async Task<GetUserPhotoResponse> Handle(GetUserPhotoRequest request, CancellationToken cancellationToken)
+    public GetUserPhotoHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
+    {
+    }
+
+    public override async Task<GetUserPhotoResponse> Handle(GetUserPhotoRequest request, CancellationToken cancellationToken)
     {
         if (request.UserId != request.LoggedUserId) 
             throw new UnauthorizedAccessException("Given user id is not valid");

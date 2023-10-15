@@ -7,18 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Regions.Features.GetAllCountryCodes;
 
-public class GetAllCountryCodesHandler : IRequestHandler<GetAllCountryCodesRequest, GetAllLibResponse>
+public class GetAllCountryCodesHandler : BaseRequestHandler<GetAllCountryCodesRequest, GetAllLibResponse>
 {
-    private readonly IMapper _mapper;
-    private readonly AppDbContext _ctx;
-
-    public GetAllCountryCodesHandler(AppDbContext ctx, IMapper mapper)
+    public GetAllCountryCodesHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
     {
-        _ctx = ctx;
-        _mapper = mapper;
     }
 
-    public async Task<GetAllLibResponse> Handle(GetAllCountryCodesRequest request, CancellationToken cancellationToken)
+    public override async Task<GetAllLibResponse> Handle(GetAllCountryCodesRequest request, CancellationToken cancellationToken)
     {
         var countryCodes = await _ctx.GetEntity<CountryCode>()
             .ToListAsync(cancellationToken);

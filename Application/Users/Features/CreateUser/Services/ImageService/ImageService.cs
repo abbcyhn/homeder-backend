@@ -1,14 +1,14 @@
-namespace Application.Commons.Utilities;
+namespace Application.Users.Features.CreateUser.Services.ImageService;
 
-public class ConverterUtility : IConverterUtility
+public class ImageService : IImageService
 {
-    public async Task<byte[]> ConvertPhotoUrlToBytes(string photoUrl, CancellationToken cancellationToken)
+    public async Task<byte[]> ConvertImageUrlToBytes(string imageUrl, CancellationToken cancellationToken)
     {
-        using HttpClient httpClient = new ();
+        using HttpClient httpClient = new();
 
-        try 
+        try
         {
-            HttpResponseMessage response = await httpClient.GetAsync(photoUrl, cancellationToken);
+            HttpResponseMessage response = await httpClient.GetAsync(imageUrl, cancellationToken);
 
             if (response.IsSuccessStatusCode)
                 return await response.Content.ReadAsByteArrayAsync(cancellationToken);

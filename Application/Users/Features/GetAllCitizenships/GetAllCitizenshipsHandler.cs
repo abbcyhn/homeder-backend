@@ -2,23 +2,17 @@
 using Application.Commons.Dtos;
 using Application.Regions.Entities;
 using AutoMapper;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Features.GetAllCitizenships;
 
-public class GetAllCitizenshipsHandler : IRequestHandler<GetAllCitizenshipsRequest, GetAllLibResponse>
+public class GetAllCitizenshipsHandler : BaseRequestHandler<GetAllCitizenshipsRequest, GetAllLibResponse>
 {
-    private readonly IMapper _mapper;
-    private readonly AppDbContext _ctx;
-
-    public GetAllCitizenshipsHandler(AppDbContext ctx, IMapper mapper)
+    public GetAllCitizenshipsHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
     {
-        _ctx = ctx;
-        _mapper = mapper;
     }
 
-    public async Task<GetAllLibResponse> Handle(GetAllCitizenshipsRequest request, CancellationToken cancellationToken)
+    public override async Task<GetAllLibResponse> Handle(GetAllCitizenshipsRequest request, CancellationToken cancellationToken)
     {
         var citizenships = await _ctx.GetEntity<Citizenship>()
             .ToListAsync(cancellationToken);

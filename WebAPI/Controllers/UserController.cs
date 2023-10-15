@@ -7,27 +7,19 @@ using Application.Users.Features.UpdateUser;
 using Application.Users.Features.UpdateUserPhoto;
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Extensions;
 
 namespace WebAPI.Controllers;
 
-[ApiController]
 [Route("api/users")]
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-public class UserController : ControllerBase
+public class UserController : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
-
-    public UserController(IMediator mediator, IMapper mapper)
+    public UserController(IMapper mapper, IMediator mediator) : base(mapper, mediator)
     {
-        _mediator = mediator;
-        _mapper = mapper;
     }
-    
+
     [HttpPost]
     [AllowAnonymous]
     public async Task<ActionResult<string>> CreateUser([FromBody] CreateUserInput input, CancellationToken cancellationToken)
@@ -41,26 +33,25 @@ public class UserController : ControllerBase
     }
 
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserInput updateUserInput)
+    [HttpPut("{userId}")]
+    public async Task<IActionResult> UpdateUser(int userId, [FromBody] UpdateUserInput updateUserInput)
     {
         var request = _mapper.Map<UpdateUserRequest>(updateUserInput);
-        request.Id = id;
-        var response = await _mediator.Send(request);
+        request.UserId = userId;
+        request.LoggedUserId = HttpContext.GetUserId();
 
-        if (response)
-        {
-            return NoContent();
-        }
-        
-        return Conflict();
+        await _mediator.Send(request);
+
+        return NoContent();
     }
 
     [HttpGet("{userId}/photo")]
     public async Task<IActionResult> GetUserPhoto(int userId, CancellationToken cancellationToken) 
     {
         var request = new GetUserPhotoRequest { UserId = userId, LoggedUserId = HttpContext.GetUserId() };
+
         var response = await _mediator.Send(request, cancellationToken);
+
         return File(response.UserPhoto, "image/png");
     }
 

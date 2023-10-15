@@ -9,17 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPI.Controllers;
 
 [Route("api/regions")]
-[ApiController]
-// [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-public class RegionController : ControllerBase
+public class RegionController : BaseController
 {
-    private readonly IMapper _mapper;
-    private readonly IMediator _mediator;
-
-    public RegionController(IMapper mapper, IMediator mediator)
+    public RegionController(IMapper mapper, IMediator mediator) : base(mapper, mediator)
     {
-        _mapper = mapper;
-        _mediator = mediator;
     }
 
     [HttpGet("countries/{countryId}")]

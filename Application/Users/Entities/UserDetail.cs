@@ -3,7 +3,7 @@ using Application.Regions.Entities;
 
 namespace Application.Users.Entities;
 
-public class UserDetails : ACE_Entity
+public class UserDetail : ACE_Entity
 {
     public int IdUser { get; set; }
     public int IdUserType { get; set; }

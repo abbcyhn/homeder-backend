@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using Application.Commons.Services.TokenService;
 using Application.Commons.Utilities;
+using Application.Users.Features.CreateUser.Services.TokenService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;

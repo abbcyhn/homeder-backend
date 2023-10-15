@@ -2,9 +2,10 @@
 
 namespace Application.Users.Features.UpdateUser;
 
-public class UpdateUserRequest : IRequest<bool>
+public class UpdateUserRequest : IRequest<UpdateUserResponse>
 {
-    public int Id { get; set; }
+    public int UserId { get; set; }
+    public int LoggedUserId { get; set; }
     public string Name { get; set; }
     public string Surname { get; set; }
     public DateTime Birthdate { get; set; }

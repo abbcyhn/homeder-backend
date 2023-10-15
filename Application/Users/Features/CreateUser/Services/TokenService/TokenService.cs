@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Application.Commons.Services.TokenService;
+namespace Application.Users.Features.CreateUser.Services.TokenService;
 
 public class TokenService : ITokenService
 {

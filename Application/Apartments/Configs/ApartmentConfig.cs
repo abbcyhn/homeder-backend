@@ -12,6 +12,7 @@ public class ApartmentConfig : ACEI_EntityConfig<Apartment>
         base.Configure(builder);
 
         builder.ToTable("APARTMENTS");
+        
         builder.Property(e => e.Title).IsRequired();
         builder.Property(e => e.Area).IsRequired();
         builder.Property(e => e.NoOfRooms).IsRequired();

@@ -9,6 +9,7 @@ public class GetAllTypesMapper : Profile
     public GetAllTypesMapper()
     {
         CreateMap<UserType, GetLibDto>();
+        
         CreateMap<List<UserType>, GetAllLibResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }

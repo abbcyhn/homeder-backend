@@ -9,6 +9,7 @@ public abstract class AIV_EntityConfig<TEntity>: IEntityTypeConfiguration<TEntit
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasKey(e => e.Id);
+        
         builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
         builder.Property(e => e.Value).IsRequired();

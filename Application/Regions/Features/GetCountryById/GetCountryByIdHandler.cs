@@ -7,18 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Regions.Features.GetCountryById;
 
-public class GetCountryByIdHandler : IRequestHandler<GetCountryByIdRequest, GetLibResponse>
+public class GetCountryByIdHandler : BaseRequestHandler<GetCountryByIdRequest, GetLibResponse>
 {
-    private readonly IMapper _mapper;
-    private readonly AppDbContext _ctx;
-
-    public GetCountryByIdHandler(AppDbContext ctx, IMapper mapper)
+    public GetCountryByIdHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
     {
-        _ctx = ctx;
-        _mapper = mapper;
     }
 
-    public async Task<GetLibResponse> Handle(GetCountryByIdRequest request, CancellationToken cancellationToken)
+    public override async Task<GetLibResponse> Handle(GetCountryByIdRequest request, CancellationToken cancellationToken)
     {
         var country = await _ctx.GetEntity<Country>()
             .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
