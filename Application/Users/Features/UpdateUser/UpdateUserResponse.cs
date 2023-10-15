@@ -1,5 +1,7 @@
+using Application.Commons.Mediator;
+
 namespace Application.Users.Features.UpdateUser;
 
-public class UpdateUserResponse
+public record UpdateUserResponse : BaseResponse
 {
 }

@@ -1,26 +1,24 @@
 ﻿using Application.Commons;
+using Application.Commons.Mediator;
 using Application.Users.Entities;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Features.UpdateUser;
 
-public class UpdateUserHandler : BaseRequestHandler<UpdateUserRequest, UpdateUserResponse>
+public class UpdateUserHandler : BaseHandler<UpdateUserRequest, UpdateUserResponse>
 {
     public UpdateUserHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
     {
     }
 
-    public override async Task<UpdateUserResponse> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
+    public override async Task<UpdateUserResponse> Execute(UpdateUserRequest request, CancellationToken cancellationToken)
     {
-        if (request.UserId != request.LoggedUserId)
-            throw new UnauthorizedAccessException("Given user id is not valid");
-
         var user = await _ctx.GetEntity<User>()
             .Include(x => x.UserDetail)
             .Include(x => x.UserEmails)
             .Include(x => x.UserPhones)
-            .FirstOrDefaultAsync(x => x.Id == request.UserId, cancellationToken);
+            .FirstAsync(x => x.Id == request.UserId, cancellationToken);
 
         user.Name = request.Name;
         user.Surname = request.Surname;

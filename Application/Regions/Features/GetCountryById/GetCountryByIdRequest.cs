@@ -1,9 +1,8 @@
-using Application.Commons.Dtos;
-using MediatR;
+using Application.Commons.Mediator;
 
 namespace Application.Regions.Features.GetCountryById;
 
-public record GetCountryByIdRequest : IRequest<GetLibResponse>
+public record GetCountryByIdRequest : BaseRequest<IdValueResponse>
 {
-    public int Id { get; set; }
+    public int CountryId { get; set; }
 }

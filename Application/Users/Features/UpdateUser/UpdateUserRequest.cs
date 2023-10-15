@@ -1,11 +1,10 @@
-﻿using MediatR;
+﻿using Application.Commons.Mediator;
+using MediatR;
 
 namespace Application.Users.Features.UpdateUser;
 
-public class UpdateUserRequest : IRequest<UpdateUserResponse>
+public record UpdateUserRequest : BaseRequest<UpdateUserResponse>
 {
-    public int UserId { get; set; }
-    public int LoggedUserId { get; set; }
     public string Name { get; set; }
     public string Surname { get; set; }
     public DateTime Birthdate { get; set; }

@@ -1,20 +1,18 @@
 using Application.Commons;
+using Application.Commons.Mediator;
 using AutoMapper;
 using MediatR;
 
 namespace Application.Users.Features.GetUserPhoto;
 
-public class GetUserPhotoHandler : BaseRequestHandler<GetUserPhotoRequest, GetUserPhotoResponse>
+public class GetUserPhotoHandler : BaseHandler<GetUserPhotoRequest, GetUserPhotoResponse>
 {
     public GetUserPhotoHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
     {
     }
 
-    public override async Task<GetUserPhotoResponse> Handle(GetUserPhotoRequest request, CancellationToken cancellationToken)
+    public override async Task<GetUserPhotoResponse> Execute(GetUserPhotoRequest request, CancellationToken cancellationToken)
     {
-        if (request.UserId != request.LoggedUserId) 
-            throw new UnauthorizedAccessException("Given user id is not valid");
-        
         string userPhotoPath = $"Photos/user-{request.UserId}.png";
         byte[] userPhoto = await File.ReadAllBytesAsync(userPhotoPath, cancellationToken);
 

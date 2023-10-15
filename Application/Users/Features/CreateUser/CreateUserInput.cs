@@ -1,6 +1,8 @@
+using Application.Commons.Mediator;
+
 namespace Application.Users.Features.CreateUser;
 
-public class CreateUserInput
+public record CreateUserInput : BaseInput
 {
     public string GoogleToken { get; set; }
 }

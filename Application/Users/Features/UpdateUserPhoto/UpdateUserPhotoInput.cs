@@ -1,6 +1,8 @@
+using Application.Commons.Mediator;
+
 namespace Application.Users.Features.UpdateUserPhoto;
 
-public class UpdateUserPhotoInput
+public record UpdateUserPhotoInput : BaseInput
 {
     public byte[] UserPhoto { get; set; }
 }

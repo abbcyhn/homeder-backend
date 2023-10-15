@@ -1,4 +1,5 @@
 using Application.Commons;
+using Application.Commons.Mediator;
 using Application.Users.Entities;
 using Application.Users.Features.CreateUser.Services.ImageService;
 using Application.Users.Features.CreateUser.Services.TokenService;
@@ -9,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Features.CreateUser;
 
-public class CreateUserHandler : BaseRequestHandler<CreateUserRequest, CreateUserResponse>
+public class CreateUserHandler : BaseHandler<CreateUserRequest, CreateUserResponse>
 {
     private readonly IMediator _mediator;
     private readonly ITokenService _tokenService;
@@ -22,7 +23,7 @@ public class CreateUserHandler : BaseRequestHandler<CreateUserRequest, CreateUse
         _imageService = imageService;
     }
 
-    public override async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
+    public override async Task<CreateUserResponse> Execute(CreateUserRequest request, CancellationToken cancellationToken)
     {
         var googleTokenData = _tokenService.DecodeGoogleToken(request.GoogleToken);
 

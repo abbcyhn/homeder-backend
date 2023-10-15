@@ -1,4 +1,4 @@
-﻿using Application.Commons.Dtos;
+﻿using Application.Commons.Mediator;
 using Application.Regions.Entities;
 using AutoMapper;
 
@@ -8,8 +8,9 @@ public class GetAllCountryCodesMapper : Profile
 {
     public GetAllCountryCodesMapper()
     {
-        CreateMap<CountryCode, GetLibDto>();
-        CreateMap<List<CountryCode>, GetAllLibResponse>()
+        CreateMap<CountryCode, IdValueDto>();
+
+        CreateMap<List<CountryCode>, IdValueListResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }
 }

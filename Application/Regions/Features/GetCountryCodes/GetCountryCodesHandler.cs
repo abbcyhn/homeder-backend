@@ -1,23 +1,22 @@
 ﻿using Application.Commons;
-using Application.Commons.Dtos;
+using Application.Commons.Mediator;
 using Application.Regions.Entities;
 using AutoMapper;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Regions.Features.GetAllCountryCodes;
 
-public class GetAllCountryCodesHandler : BaseRequestHandler<GetAllCountryCodesRequest, GetAllLibResponse>
+public class GetAllCountryCodesHandler : BaseHandler<GetAllCountryCodesRequest, IdValueListResponse>
 {
     public GetAllCountryCodesHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
     {
     }
 
-    public override async Task<GetAllLibResponse> Handle(GetAllCountryCodesRequest request, CancellationToken cancellationToken)
+    public override async Task<IdValueListResponse> Execute(GetAllCountryCodesRequest request, CancellationToken cancellationToken)
     {
         var countryCodes = await _ctx.GetEntity<CountryCode>()
             .ToListAsync(cancellationToken);
 
-        return _mapper.Map<GetAllLibResponse>(countryCodes);
+        return _mapper.Map<IdValueListResponse>(countryCodes);
     }
 }
