@@ -1,7 +1,8 @@
 using Application.Commons;
-using Application.Commons.Services.TokenService;
-using Application.Commons.Utilities;
+using Application.Commons.Mediator;
 using Application.Users.Entities;
+using Application.Users.Features.CreateUser.Services.ImageService;
+using Application.Users.Features.CreateUser.Services.TokenService;
 using Application.Users.Features.UpdateUserPhoto;
 using AutoMapper;
 using MediatR;
@@ -9,30 +10,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Features.CreateUser;
 
-public class CreateUserHandler : IRequestHandler<CreateUserRequest, CreateUserResponse>
+public class CreateUserHandler : BaseHandler<CreateUserRequest, CreateUserResponse>
 {
-    private readonly IMapper _mapper;
-    private readonly AppDbContext _ctx;
     private readonly IMediator _mediator;
     private readonly ITokenService _tokenService;
-    private readonly IConverterUtility _converterUtility;
+    private readonly IImageService _imageService;
 
-    public CreateUserHandler(AppDbContext ctx, IMapper mapper, ITokenService tokenService, IConverterUtility converterUtility, IMediator mediator)
+    public CreateUserHandler(AppDbContext ctx, IMapper mapper, ITokenService tokenService, IImageService imageService, IMediator mediator) : base (mapper, ctx)
     {
-        _ctx = ctx;
-        _mapper = mapper;
         _mediator = mediator;
         _tokenService = tokenService;
-        _converterUtility = converterUtility;
+        _imageService = imageService;
     }
 
-    public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
+    public override async Task<CreateUserResponse> Execute(CreateUserRequest request, CancellationToken cancellationToken)
     {
         var googleTokenData = _tokenService.DecodeGoogleToken(request.GoogleToken);
 
-        var user = _ctx.GetEntity<User>()
+        var user = await _ctx.GetEntity<User>()
             .Include(u => u.UserEmails)
-            .FirstOrDefault(u => u.UserEmails.Any(e => e.Email == googleTokenData.Email));
+            .FirstOrDefaultAsync(u => u.UserEmails.Any(e => e.Email == googleTokenData.Email), cancellationToken);
 
         if (user == null)
         {
@@ -56,7 +53,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserRequest, CreateUserRe
         if (string.IsNullOrEmpty(photoUrl)) 
             return null;
 
-        var userPhoto = await _converterUtility.ConvertPhotoUrlToBytes(photoUrl, cancellationToken);
+        var userPhoto = await _imageService.ConvertImageUrlToBytes(photoUrl, cancellationToken);
         var request = new UpdateUserPhotoRequest { UserId = userId, UserPhoto = userPhoto, LoggedUserId = userId, HostUrl = hostUrl };
         var response = await _mediator.Send(request, cancellationToken);
 

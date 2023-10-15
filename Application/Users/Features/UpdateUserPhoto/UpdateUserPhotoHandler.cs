@@ -1,18 +1,23 @@
+using Application.Commons;
+using Application.Commons.Mediator;
+using AutoMapper;
 using MediatR;
 
 namespace Application.Users.Features.UpdateUserPhoto;
 
-public class UpdateUserPhotoHandler : IRequestHandler<UpdateUserPhotoRequest, UpdateUserPhotoResponse>
+public class UpdateUserPhotoHandler : BaseHandler<UpdateUserPhotoRequest, UpdateUserPhotoResponse>
 {
-    public async Task<UpdateUserPhotoResponse> Handle(UpdateUserPhotoRequest request, CancellationToken cancellationToken)
+    public UpdateUserPhotoHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
     {
-        if (request.UserId != request.LoggedUserId) 
-            throw new UnauthorizedAccessException("Given user id is not valid");
+    }
 
+    public override async Task<UpdateUserPhotoResponse> Execute(UpdateUserPhotoRequest request, CancellationToken cancellationToken)
+    {
         string photoPath = GetPhotoPath(request.UserId);
+
         await File.WriteAllBytesAsync(photoPath, request.UserPhoto, cancellationToken);
 
-        return new UpdateUserPhotoResponse { PhotoUrl = $"{request.HostUrl}/users/{request.UserId}/photo" };
+        return new UpdateUserPhotoResponse { PhotoUrl = $"{request.HostUrl}" };
     }
 
     private string GetPhotoPath(int userId)

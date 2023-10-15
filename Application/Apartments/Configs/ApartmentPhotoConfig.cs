@@ -13,6 +13,7 @@ public class ApartmentPhotoConfig : ACE_EntityConfig<ApartmentPhoto>
 
         builder.ToTable("APARTMENT_PHOTOS");
         builder.HasKey(e => new { e.IdApartment, e.PhotoUrl });
+        
         builder.Property(e => e.PhotoUrl).IsRequired();
 
         builder.HasOne(e => e.Apartment)

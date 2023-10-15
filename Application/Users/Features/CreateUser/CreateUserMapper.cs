@@ -1,5 +1,5 @@
-using Application.Commons.Services.TokenService;
 using Application.Users.Entities;
+using Application.Users.Features.CreateUser.Services.TokenService;
 using AutoMapper;
 
 namespace Application.Users.Features.CreateUser;

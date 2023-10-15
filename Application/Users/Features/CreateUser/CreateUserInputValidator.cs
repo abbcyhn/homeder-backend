@@ -1,4 +1,4 @@
-using Application.Commons.Services.TokenService;
+using Application.Users.Features.CreateUser.Services.TokenService;
 using FluentValidation;
 
 namespace Application.Users.Features.CreateUser;

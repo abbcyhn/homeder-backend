@@ -1,6 +1,8 @@
+using Application.Commons.Mediator;
+
 namespace Application.Users.Features.UpdateUserPhoto;
 
-public class UpdateUserPhotoResponse
+public record UpdateUserPhotoResponse : BaseResponse
 {
     public string PhotoUrl { get; set; }
 }

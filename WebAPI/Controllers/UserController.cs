@@ -1,77 +1,59 @@
-using Application.Commons.Dtos;
+using Application.Commons.Mediator;
 using Application.Users.Features.CreateUser;
-using Application.Users.Features.GetAllCitizenships;
-using Application.Users.Features.GetAllTypes;
+using Application.Users.Features.GetCitizenships;
+using Application.Users.Features.GetTypes;
 using Application.Users.Features.GetUserPhoto;
 using Application.Users.Features.UpdateUser;
 using Application.Users.Features.UpdateUserPhoto;
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Extensions;
 
 namespace WebAPI.Controllers;
 
-[ApiController]
 [Route("api/users")]
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-public class UserController : ControllerBase
+public class UserController : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
-
-    public UserController(IMediator mediator, IMapper mapper)
+    public UserController(IMapper mapper, IMediator mediator) : base(mapper, mediator)
     {
-        _mediator = mediator;
-        _mapper = mapper;
     }
-    
+
     [HttpPost]
     [AllowAnonymous]
     public async Task<ActionResult<string>> CreateUser([FromBody] CreateUserInput input, CancellationToken cancellationToken)
     {
         var request = _mapper.Map<CreateUserRequest>(input);
-        request.HostUrl = HttpContext.Request.Host.Value;
         
         var response = await _mediator.Send(request, cancellationToken);
         
         return Ok(response.HomederToken);
     }
 
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserInput updateUserInput)
+    [HttpPut("{userId}")]
+    public async Task<IActionResult> UpdateUser([FromBody] UpdateUserInput input)
     {
-        var request = _mapper.Map<UpdateUserRequest>(updateUserInput);
-        request.Id = id;
-        var response = await _mediator.Send(request);
+        var request = _mapper.Map<UpdateUserRequest>(input);
 
-        if (response)
-        {
-            return NoContent();
-        }
-        
-        return Conflict();
+        await _mediator.Send(request);
+
+        return NoContent();
     }
 
     [HttpGet("{userId}/photo")]
-    public async Task<IActionResult> GetUserPhoto(int userId, CancellationToken cancellationToken) 
+    public async Task<IActionResult> GetUserPhoto([FromRoute] GetUserPhotoInput input, CancellationToken cancellationToken) 
     {
-        var request = new GetUserPhotoRequest { UserId = userId, LoggedUserId = HttpContext.GetUserId() };
+        var request = _mapper.Map<GetUserPhotoRequest>(input);
+
         var response = await _mediator.Send(request, cancellationToken);
+
         return File(response.UserPhoto, "image/png");
     }
 
     [HttpPost("{userId}/photo")]
-    public async Task<ActionResult<string>> UpdateUserPhoto([FromRoute] int userId, UpdateUserPhotoInput input,
-        CancellationToken cancellationToken)
+    public async Task<ActionResult<string>> UpdateUserPhoto(UpdateUserPhotoInput input, CancellationToken cancellationToken)
     {
         var request = _mapper.Map<UpdateUserPhotoRequest>(input);
-        request.UserId = userId;
-        request.LoggedUserId = HttpContext.GetUserId();
-        request.HostUrl = HttpContext.Request.Host.Value;
         
         var response = await _mediator.Send(request, cancellationToken);
         
@@ -79,9 +61,9 @@ public class UserController : ControllerBase
     }    
     
     [HttpGet("citizenships")]
-    public async Task<ActionResult<GetAllLibResponse>> GetAllCitizenships(CancellationToken cancellationToken)
+    public async Task<ActionResult<IdValueListResponse>> GetCitizenships(CancellationToken cancellationToken)
     {
-        var request = new GetAllCitizenshipsRequest();
+        var request = new GetCitizenshipsRequest();
         
         var response = await _mediator.Send(request, cancellationToken);
         
@@ -89,9 +71,9 @@ public class UserController : ControllerBase
     }
     
     [HttpGet("types")]
-    public async Task<ActionResult<GetAllLibResponse>> GetAllTypes(CancellationToken cancellationToken)
+    public async Task<ActionResult<IdValueListResponse>> GetTypes(CancellationToken cancellationToken)
     {
-        var request = new GetAllTypesRequest();
+        var request = new GetTypesRequest();
         
         var response = await _mediator.Send(request, cancellationToken);
         

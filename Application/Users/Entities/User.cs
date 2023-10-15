@@ -14,5 +14,5 @@ public class User : ACEI_Entity
     public ICollection<UserEmail> UserEmails { get; set; }
     public ICollection<UserPhone> UserPhones { get; set; }
     public ICollection<UserApartment> UserApartments { get; set; }
-    public UserDetails UserDetails { get; set; }
+    public UserDetail UserDetail { get; set; }
 }

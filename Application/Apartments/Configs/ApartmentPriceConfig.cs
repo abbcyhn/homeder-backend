@@ -13,6 +13,7 @@ public class ApartmentPriceConfig : ACE_EntityConfig<ApartmentPrice>
 
         builder.ToTable("APARTMENT_PRICES");
         builder.HasKey(e => e.IdApartment);
+        
         builder.Property(e => e.Price).IsRequired();
         builder.Property(e => e.IdPriceCurrency).IsRequired();
         builder.Property(e => e.PriceExtra);

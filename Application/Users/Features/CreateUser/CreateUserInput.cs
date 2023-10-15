@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
+using Application.Commons.Mediator;
 
 namespace Application.Users.Features.CreateUser;
 
-public class CreateUserInput
+public record CreateUserInput : BaseInput
 {
-    [FromQuery(Name = "googleToken")]
     public string GoogleToken { get; set; }
 }

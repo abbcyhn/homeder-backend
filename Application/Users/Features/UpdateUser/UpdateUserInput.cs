@@ -1,6 +1,8 @@
-﻿namespace Application.Users.Features.UpdateUser;
+﻿using Application.Commons.Mediator;
 
-public class UpdateUserInput
+namespace Application.Users.Features.UpdateUser;
+
+public record UpdateUserInput : BaseInput
 {
     public string Name { get; set; }
     public string Surname { get; set; }

@@ -1,6 +1,5 @@
 ﻿using System.Text;
-using Application.Commons.Services.TokenService;
-using Application.Commons.Utilities;
+using Application.Users.Features.CreateUser.Services.TokenService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -16,7 +15,6 @@ public static class ServiceCollectionExtensions
         services.AddSwaggerGen(x =>
         {
             x.SwaggerDoc("v1", new OpenApiInfo { Title = "Homeder API", Version = "v1" });
-
             x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Description = "JWT Authorization header using bearer scheme",

@@ -1,47 +1,38 @@
 ﻿using Application.Commons;
+using Application.Commons.Mediator;
 using Application.Users.Entities;
 using AutoMapper;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Features.UpdateUser;
 
-public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, bool>
+public class UpdateUserHandler : BaseHandler<UpdateUserRequest, UpdateUserResponse>
 {
-    private readonly IMapper _mapper;
-    private readonly AppDbContext _ctx;
-
-    public UpdateUserHandler(AppDbContext ctx, IMapper mapper)
+    public UpdateUserHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
     {
-        _ctx = ctx;
-        _mapper = mapper;
     }
 
-    public async Task<bool> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
+    public override async Task<UpdateUserResponse> Execute(UpdateUserRequest request, CancellationToken cancellationToken)
     {
         var user = await _ctx.GetEntity<User>()
-            .Include(x=>x.UserDetails)
-            .Include(x=>x.UserEmails)
-            .Include(x=>x.UserPhones)
-            .FirstOrDefaultAsync(x=>x.Id == request.Id);
-
-        if (user == null) return false;
+            .Include(x => x.UserDetail)
+            .Include(x => x.UserEmails)
+            .Include(x => x.UserPhones)
+            .FirstAsync(x => x.Id == request.UserId, cancellationToken);
 
         user.Name = request.Name;
         user.Surname = request.Surname;
         user.Birthdate = request.Birthdate;
         user.IdRole = request.IdRole;
-        user.EditDate = DateTime.UtcNow;
 
-        user.UserDetails.IdUserType = request.IdUserType;
-        user.UserDetails.HasChild = request.HasChild;
-        user.UserDetails.IsSmoker = request.IsSmoker;
-        user.UserDetails.HasBankStatement = request.HasBankStatement;
-        user.UserDetails.HasUmowaOkazionalny = request.HasUmowaOkazionalny;
-        user.UserDetails.HasWorkContract = request.HasWorkContract;
-        user.UserDetails.HasWorkPermit = request.HasWorkPermit;
-        user.EditDate = DateTime.UtcNow;
-        
+        user.UserDetail.IdUserType = request.IdUserType;
+        user.UserDetail.HasChild = request.HasChild;
+        user.UserDetail.IsSmoker = request.IsSmoker;
+        user.UserDetail.HasBankStatement = request.HasBankStatement;
+        user.UserDetail.HasUmowaOkazionalny = request.HasUmowaOkazionalny;
+        user.UserDetail.HasWorkContract = request.HasWorkContract;
+        user.UserDetail.HasWorkPermit = request.HasWorkPermit;
+
         if (!string.IsNullOrEmpty(request.PhoneNumber))
         {
             user.UserPhones = new List<UserPhone>()
@@ -50,11 +41,10 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, bool>
                 {
                     IdCountryCode = request.PhoneCountryCode,
                     PhoneNumber = request.PhoneNumber,
-                    CreateDate = DateTime.UtcNow
                 }
             };
         }
-        
+
         if (!string.IsNullOrEmpty(request.Email))
         {
             user.UserEmails = new List<UserEmail>()
@@ -62,15 +52,14 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, bool>
                 new ()
                 {
                     Email = request.Email,
-                    CreateDate = DateTime.UtcNow
                 }
             };
         }
-        
+
         _ctx.GetEntity<User>().Update(user);
 
-        var affectedRows = await _ctx.SaveChangesAsync(cancellationToken);
+        await _ctx.SaveChangesAsync(cancellationToken);
 
-        return affectedRows >= 1;
+        return new UpdateUserResponse();
     }
 }
