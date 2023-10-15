@@ -9,14 +9,13 @@ namespace Application.Regions.Features.GetAllCountries;
 
 public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesRequest, GetAllLibResponse>
 {
-    private IMapper _mapper;
+    private readonly IMapper _mapper;
     private readonly AppDbContext _ctx;
 
     public GetAllCountriesHandler(AppDbContext ctx, IMapper mapper)
     {
         _ctx = ctx;
         _mapper = mapper;
-
     }
 
     public async Task<GetAllLibResponse> Handle(GetAllCountriesRequest request, CancellationToken cancellationToken)
