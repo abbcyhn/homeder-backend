@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Users.Configs;
 
-public class UserDetailConfig : ACE_EntityConfig<UserDetail>
+public class UserDetailConfig : BaseEntityConfig<UserDetail>
 {
     public override void Configure(EntityTypeBuilder<UserDetail> builder)
     {
         base.Configure(builder);
 
         builder.ToTable("USER_DETAILS");
-        builder.HasKey(e => e.IdUser);
+
         builder.Property(e => e.IdUserType).IsRequired();
         builder.Property(e => e.IdCitizenship).IsRequired();
         builder.Property(e => e.NoOfPeople).IsRequired();

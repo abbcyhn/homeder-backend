@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Regions.Configs;
 
-public class CountryCodeConfig : AIV_EntityConfig<CountryCode>
+public class CountryCodeConfig : IdValueEntityConfig<CountryCode>
 {
     public override void Configure(EntityTypeBuilder<CountryCode> builder)
     {

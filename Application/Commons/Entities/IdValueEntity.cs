@@ -1,6 +1,6 @@
 namespace Application.Commons.Entities;
 
-public interface IValueEntity
+public abstract class IdValueEntity : BaseEntity
 {
     public string Value { get; set; }
 }

@@ -2,7 +2,7 @@
 
 namespace Application.Users.Entities;
 
-public class UserEmail : ACEI_Entity
+public class UserEmail : BaseEntity
 {
     public int IdUser { get; set; }
     public string Email { get; set; }

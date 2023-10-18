@@ -2,7 +2,7 @@
 
 namespace Application.Regions.Entities;
 
-public class Country : AIV_Entity
+public class Country : IdValueEntity
 {
     public ICollection<CountryCode> CountryCodes { get; set; }
     public ICollection<Citizenship> Citizenships { get; set; }

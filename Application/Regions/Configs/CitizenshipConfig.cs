@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Regions.Configs;
 
-public class CitizenshipConfig : AIV_EntityConfig<Citizenship>
+public class CitizenshipConfig : IdValueEntityConfig<Citizenship>
 {
     public override void Configure(EntityTypeBuilder<Citizenship> builder)
     {

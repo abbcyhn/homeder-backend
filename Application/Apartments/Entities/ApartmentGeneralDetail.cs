@@ -2,7 +2,7 @@
 
 namespace Application.Apartments.Entities;
 
-public class ApartmentGeneralDetail : ACE_Entity
+public class ApartmentGeneralDetail : BaseEntity
 {
     public int IdApartment { get; set; }
     public bool? HasBuildingType { get; set; }

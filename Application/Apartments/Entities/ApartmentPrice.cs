@@ -2,7 +2,7 @@
 
 namespace Application.Apartments.Entities;
 
-public class ApartmentPrice : ACE_Entity
+public class ApartmentPrice : BaseEntity
 {
     public int IdApartment { get; set; }
     public decimal Price { get; set; }

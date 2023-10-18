@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Apartments.Configs;
 
-public class ApartmentTenantDetailConfig : ACE_EntityConfig<ApartmentTenantDetail>
+public class ApartmentTenantDetailConfig : BaseEntityConfig<ApartmentTenantDetail>
 {
     public override void Configure(EntityTypeBuilder<ApartmentTenantDetail> builder)
     {
         base.Configure(builder);
 
         builder.ToTable("APARTMENT_TENANT_DETAILS");
-        builder.HasKey(e => e.IdApartment);
 
         builder.Property(e => e.AllowsSmoking);
         builder.Property(e => e.AllowsPets);

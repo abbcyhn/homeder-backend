@@ -2,7 +2,7 @@
 
 namespace Application.Apartments.Entities;
 
-public class ApartmentMediaDetail : ACE_Entity
+public class ApartmentMediaDetail : BaseEntity
 {
     public int IdApartment { get; set; }
     public bool? HasCableTv { get; set; }
