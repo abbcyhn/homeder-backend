@@ -37,7 +37,7 @@ builder.Services.AddSingleton<ITokenService, TokenService>();
 
 builder.Services.AddAuthenticationConfigs(authSetting);
 
-builder.Services.AddSwaggerConfigs();
+builder.Services.AddSwaggerDocumentation();
 
 var app = builder.Build();
 
@@ -45,8 +45,7 @@ app.UseAuthentication();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDocumentation();
 }
 
 app.MapHealthChecks("/health-check");
