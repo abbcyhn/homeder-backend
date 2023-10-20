@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.ActionFilters;
+using WebAPI.Filters;
 
 namespace WebAPI.Controllers;
 

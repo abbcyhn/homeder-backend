@@ -2,7 +2,7 @@
 using Application.Regions.Entities;
 using AutoMapper;
 
-namespace Application.Regions.Features.GetAllCountryCodes;
+namespace Application.Regions.Features.GetCountryCodes;
 
 public class GetAllCountryCodesMapper : Profile
 {

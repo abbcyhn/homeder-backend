@@ -5,8 +5,8 @@ using Application.Users.Features.CreateUser.Services.TokenService;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.ActionFilters;
 using WebAPI.Extensions;
+using WebAPI.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 

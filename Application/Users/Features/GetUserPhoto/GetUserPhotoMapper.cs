@@ -1,7 +1,6 @@
-using Application.Users.Features.GetUserPhoto;
 using AutoMapper;
 
-namespace Application.Users.Features.CreateUser;
+namespace Application.Users.Features.GetUserPhoto;
 
 public class GetUserPhotoMapper : Profile
 {

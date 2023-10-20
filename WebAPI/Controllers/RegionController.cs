@@ -1,7 +1,7 @@
 using Application.Commons.Mediator;
-using Application.Regions.Features.GetAllCountryCodes;
 using Application.Regions.Features.GetCountries;
 using Application.Regions.Features.GetCountryById;
+using Application.Regions.Features.GetCountryCodes;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
