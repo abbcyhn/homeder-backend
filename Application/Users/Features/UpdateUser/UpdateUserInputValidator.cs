@@ -75,13 +75,15 @@ public class UpdateUserInputValidator : AbstractValidator<UpdateUserInput>
         return _ctx.GetEntity<Citizenship>().Any(x => x.Id == citizenship);
     }
 
-    private bool BeValidUserType(int userType)
+    private bool BeValidUserType(Enums.UserType userType)
     {
-        return _ctx.GetEntity<UserType>().Any(x => x.Id == userType);
+        var type = userType.GetType();
+        return type.IsEnum && Enum.IsDefined(type, userType);
     }
 
-    private bool BeValidUserRole(int userRole)
+    private bool BeValidUserRole(Enums.UserRole userRole)
     {
-        return _ctx.GetEntity<UserRole>().Any(x => x.Id == userRole);
+        var type = userRole.GetType();
+        return type.IsEnum && Enum.IsDefined(type, userRole);
     }
 }

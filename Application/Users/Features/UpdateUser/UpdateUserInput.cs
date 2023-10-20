@@ -1,4 +1,5 @@
 ﻿using Application.Commons.Mediator;
+using Application.Users.Enums;
 
 namespace Application.Users.Features.UpdateUser;
 
@@ -12,8 +13,8 @@ public record UpdateUserInput : BaseInput
     public string PhoneNumber { get; set; }
     public int Citizenship { get; set; }
     public int NumberOfPeople { get; set; }
-    public int UserType { get; set; }
-    public int UserRole { get; set; }
+    public UserType UserType { get; set; }
+    public UserRole UserRole { get; set; }
     public bool IsSmoker { get; set; }
     public bool HasChild { get; set; }
     public bool HasPet { get; set; }
