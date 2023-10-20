@@ -8,7 +8,8 @@ public class CreateUserMapper : Profile
 {
     public CreateUserMapper()
     {
-        CreateMap<CreateUserInput, CreateUserRequest>();
+        CreateMap<CreateUserInput, CreateUserRequest>()
+            .ForMember(dest => dest.IdRole, opt => opt.MapFrom(src => src.UserRole));
 
         CreateMap<GoogleTokenData, User>()
             .ForMember(dest => dest.PhotoUrl, opt => opt.Ignore());

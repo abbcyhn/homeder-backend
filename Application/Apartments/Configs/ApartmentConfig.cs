@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Apartments.Configs;
 
-public class ApartmentConfig : ACEI_EntityConfig<Apartment>
+public class ApartmentConfig : BaseEntityConfig<Apartment>
 {
     public override void Configure(EntityTypeBuilder<Apartment> builder)
     {

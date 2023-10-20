@@ -2,7 +2,7 @@
 
 namespace Application.Apartments.Entities;
 
-public class ApartmentSecurityDetail : ACE_Entity
+public class ApartmentSecurityDetail : BaseEntity
 {
     public int IdApartment { get; set; }
     public bool? HasAlarmSystem { get; set; }

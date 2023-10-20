@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Users.Configs;
 
-public class UserActionConfig : AIV_EntityConfig<UserAction>
+public class UserActionConfig : IdValueEntityConfig<UserAction>
 {
     public override void Configure(EntityTypeBuilder<UserAction> builder)
     {
+        base.Configure(builder);
+
         builder.ToTable("USER_ACTIONS");
     }
 }

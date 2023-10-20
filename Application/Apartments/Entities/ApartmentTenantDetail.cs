@@ -2,7 +2,7 @@
 
 namespace Application.Apartments.Entities;
 
-public class ApartmentTenantDetail : ACE_Entity
+public class ApartmentTenantDetail : BaseEntity
 {
     public int IdApartment { get; set; }
     public bool? AllowsSmoking { get; set; }

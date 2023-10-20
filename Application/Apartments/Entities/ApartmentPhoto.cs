@@ -2,7 +2,7 @@
 
 namespace Application.Apartments.Entities;
 
-public class ApartmentPhoto : ACE_Entity
+public class ApartmentPhoto : BaseEntity
 {
     public int IdApartment { get; set; }
     public string PhotoUrl { get; set; }

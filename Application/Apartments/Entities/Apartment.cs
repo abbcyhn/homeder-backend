@@ -3,7 +3,7 @@ using Application.Users.Entities;
 
 namespace Application.Apartments.Entities;
 
-public class Apartment : ACEI_Entity
+public class Apartment : BaseEntity
 {
     public string Title { get; set; }
     public decimal Area { get; set; }

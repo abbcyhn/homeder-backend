@@ -2,7 +2,7 @@
 
 namespace Application.Apartments.Entities;
 
-public class ApartmentAdditionalDetail : ACE_Entity
+public class ApartmentAdditionalDetail : BaseEntity
 {
     public int IdApartment { get; set; }
     public bool? HasStorage { get; set; }

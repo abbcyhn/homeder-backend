@@ -2,6 +2,6 @@
 
 namespace Application.Users.Entities;
 
-public class UserAction : AIV_Entity
+public class UserAction : IdValueEntity
 {
 }

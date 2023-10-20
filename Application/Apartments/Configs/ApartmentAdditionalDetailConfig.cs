@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Apartments.Configs;
 
-public class ApartmentAdditionalDetailConfig : ACE_EntityConfig<ApartmentAdditionalDetail>
+public class ApartmentAdditionalDetailConfig : BaseEntityConfig<ApartmentAdditionalDetail>
 {
     public override void Configure(EntityTypeBuilder<ApartmentAdditionalDetail> builder)
     {
         base.Configure(builder);
 
         builder.ToTable("APARTMENT_ADDITIONAL_DETAILS");
-        builder.HasKey(e => e.IdApartment);
 
         builder.Property(e => e.HasStorage);
         builder.Property(e => e.HasCellar);

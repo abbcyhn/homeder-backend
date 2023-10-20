@@ -3,7 +3,7 @@ using Application.Users.Entities;
 
 namespace Application.Regions.Entities;
 
-public class CountryCode : AIV_Entity
+public class CountryCode : IdValueEntity
 {
     public int IdCountry { get; set; }
 

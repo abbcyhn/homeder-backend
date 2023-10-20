@@ -18,12 +18,6 @@ public abstract class BaseHandler<TRequest, TResponse> : IRequestHandler<TReques
 
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"HostUrl = {request.HostUrl}");
-        Console.WriteLine($"UserId = {request.UserId}");
-        Console.WriteLine($"LoggedUserId = {request.LoggedUserId}");
-        Console.WriteLine($"IsUserIdProvided = {request.IsUserIdProvided}");
-        Console.WriteLine("\n\n");
-
         if (request.IsUserIdProvided && request.UserId != 0 && request.UserId != request.LoggedUserId) 
             throw new UnauthorizedAccessException("Given user id is not valid");
 

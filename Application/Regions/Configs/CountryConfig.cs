@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Regions.Configs;
 
-public class CountryConfig : AIV_EntityConfig<Country>
+public class CountryConfig : IdValueEntityConfig<Country>
 {
     public override void Configure(EntityTypeBuilder<Country> builder)
     {
+        base.Configure(builder);
+
         builder.ToTable("COUNTRIES");
 
         builder.HasMany(e => e.CountryCodes)

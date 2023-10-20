@@ -34,6 +34,7 @@ public class CreateUserHandler : BaseHandler<CreateUserRequest, CreateUserRespon
         if (user == null)
         {
             user = _mapper.Map<User>(googleTokenData);
+            user.IdRole = request.IdRole;
             await _ctx.GetEntity<User>().AddAsync(user, cancellationToken);
             await _ctx.SaveChangesAsync(cancellationToken);
 

@@ -25,13 +25,16 @@ public class UpdateUserHandler : BaseHandler<UpdateUserRequest, UpdateUserRespon
         user.Birthdate = request.Birthdate;
         user.IdRole = request.IdRole;
 
-        user.UserDetail.IdUserType = request.IdUserType;
-        user.UserDetail.HasChild = request.HasChild;
-        user.UserDetail.IsSmoker = request.IsSmoker;
-        user.UserDetail.HasBankStatement = request.HasBankStatement;
-        user.UserDetail.HasUmowaOkazionalny = request.HasUmowaOkazionalny;
-        user.UserDetail.HasWorkContract = request.HasWorkContract;
-        user.UserDetail.HasWorkPermit = request.HasWorkPermit;
+        user.UserDetail = new UserDetail
+        {
+            IdUserType = request.IdUserType,
+            HasChild = request.HasChild,
+            IsSmoker = request.IsSmoker,
+            HasBankStatement = request.HasBankStatement,
+            HasUmowaOkazionalny = request.HasUmowaOkazionalny,
+            HasWorkContract = request.HasWorkContract,
+            HasWorkPermit = request.HasWorkPermit
+        };
 
         if (!string.IsNullOrEmpty(request.PhoneNumber))
         {

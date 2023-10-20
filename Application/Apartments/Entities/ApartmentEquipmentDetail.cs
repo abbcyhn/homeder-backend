@@ -2,7 +2,7 @@
 
 namespace Application.Apartments.Entities;
 
-public class ApartmentEquipmentDetail : ACE_Entity
+public class ApartmentEquipmentDetail : BaseEntity
 {
     public int IdApartment { get; set; }
     public bool? HasFridge { get; set; }

@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Apartments.Configs;
 
-public class ApartmentMediaDetailConfig : ACE_EntityConfig<ApartmentMediaDetail>
+public class ApartmentMediaDetailConfig : BaseEntityConfig<ApartmentMediaDetail>
 {
     public override void Configure(EntityTypeBuilder<ApartmentMediaDetail> builder)
     {
         base.Configure(builder);
 
         builder.ToTable("APARTMENT_MEDIA_DETAILS");
-        builder.HasKey(e => e.IdApartment);
 
         builder.Property(e => e.HasCableTv);
         builder.Property(e => e.HasSatelliteTv);

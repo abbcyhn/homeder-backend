@@ -2,6 +2,6 @@
 
 namespace Application.Users.Entities;
 
-public class UserType : AIV_Entity
+public class UserType : IdValueEntity
 {
 }

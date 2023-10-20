@@ -3,7 +3,7 @@ using Application.Commons.Entities;
 
 namespace Application.Users.Entities;
 
-public class UserApartment : ACE_Entity
+public class UserApartment : BaseEntity
 {
     public int IdUser { get; set; }
     public int IdApartment { get; set; }

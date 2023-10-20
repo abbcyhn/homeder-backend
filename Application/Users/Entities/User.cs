@@ -2,7 +2,7 @@
 
 namespace Application.Users.Entities;
 
-public class User : ACEI_Entity
+public class User : BaseEntity
 {
     public string Name { get; set; }
     public string Surname { get; set; }

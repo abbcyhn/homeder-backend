@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Application.Users.Configs;
 
-public class UserTypeConfig : AIV_EntityConfig<UserType>
+public class UserTypeConfig : IdValueEntityConfig<UserType>
 {
     public override void Configure(EntityTypeBuilder<UserType> builder)
     {

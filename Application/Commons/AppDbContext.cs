@@ -66,12 +66,12 @@ public class AppDbContext : DbContext
 
         foreach (var entityEntry in entries)
         {
-            if (entityEntry is { Entity: ICreatableEntity creatableEntity, State: EntityState.Added })
+            if (entityEntry is { Entity: BaseEntity creatableEntity, State: EntityState.Added })
             {
                 creatableEntity.CreateDate = DateTime.UtcNow;
             }
             
-            if (entityEntry is { Entity: IEditableEntity editableEntity, State: EntityState.Modified })
+            if (entityEntry is { Entity: BaseEntity editableEntity, State: EntityState.Modified })
             {
                 editableEntity.EditDate = DateTime.UtcNow;
             }
