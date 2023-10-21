@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace WebAPI.Extensions;
 
-public static class ServiceCollectionExtensions
+public static class AuthServiceExtensions
 {
     public static void AddAuthenticationConfigs(this IServiceCollection services, AuthSetting authSettings)
     {
