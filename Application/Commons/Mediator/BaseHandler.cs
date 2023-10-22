@@ -1,3 +1,4 @@
+using Application.Commons.DataAccess;
 using AutoMapper;
 using MediatR;
 
@@ -9,11 +10,18 @@ public abstract class BaseHandler<TRequest, TResponse> : IRequestHandler<TReques
 {
     protected readonly IMapper _mapper;
     protected readonly AppDbContext _ctx;
+    protected readonly IUnitOfWork _uow;
 
     public BaseHandler(IMapper mapper, AppDbContext ctx)
     {
         _mapper = mapper;
         _ctx = ctx;
+    }
+
+    public BaseHandler(IMapper mapper, IUnitOfWork uow)
+    {
+        _mapper = mapper;
+        _uow = uow;
     }
 
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
