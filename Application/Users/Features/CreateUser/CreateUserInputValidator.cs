@@ -1,3 +1,4 @@
+using Application.Users.Enums;
 using Application.Users.Features.CreateUser.Services.TokenService;
 using FluentValidation;
 
@@ -27,9 +28,9 @@ public class CreateUserInputValidator : AbstractValidator<CreateUserInput>
         return isValid;
     }
     
-    private bool BeValidUserRole(Enums.UserRole userRole)
+    private bool BeValidUserRole(UserRoleEnum userRoleEnum)
     {
-        var type = userRole.GetType();
-        return type.IsEnum && Enum.IsDefined(type, userRole);
+        var type = userRoleEnum.GetType();
+        return type.IsEnum && Enum.IsDefined(type, userRoleEnum) && userRoleEnum != UserRoleEnum.None;
     }
 }

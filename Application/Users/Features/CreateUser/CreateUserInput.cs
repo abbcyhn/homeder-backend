@@ -6,5 +6,5 @@ namespace Application.Users.Features.CreateUser;
 public record CreateUserInput : BaseInput
 {
     public string GoogleToken { get; set; }
-    public UserRole UserRole { get; set; }
+    public UserRoleEnum UserRole { get; set; }
 }

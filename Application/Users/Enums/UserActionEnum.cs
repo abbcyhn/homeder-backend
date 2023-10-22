@@ -1,6 +1,6 @@
 ﻿namespace Application.Users.Enums;
 
-public enum UserAction
+public enum UserActionEnum
 {
     None,
     Like,

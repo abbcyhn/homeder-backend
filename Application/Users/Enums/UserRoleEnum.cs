@@ -1,6 +1,6 @@
 ﻿namespace Application.Users.Enums;
 
-public enum UserRole
+public enum UserRoleEnum
 {
     None,
     Tenant,

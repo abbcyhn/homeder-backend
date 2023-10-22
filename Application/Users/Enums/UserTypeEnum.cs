@@ -1,6 +1,6 @@
 ﻿namespace Application.Users.Enums;
 
-public enum UserType
+public enum UserTypeEnum
 {
     None,
     JustMe,
