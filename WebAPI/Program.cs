@@ -11,13 +11,14 @@ using WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
+builder.Services.AddTransient<DeveloperExceptionHandlerMiddleware>();
+builder.Services.AddTransient<ProductionsExceptionHandlerMiddleware>();
 builder.Services.AddHealthChecks();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresqlDocker")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresqlDocker")));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
@@ -56,7 +57,15 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+if (app.Environment.IsDevelopment())
+{
+    app.UseMiddleware<DeveloperExceptionHandlerMiddleware>();
+}
+
+if (app.Environment.IsProduction())
+{
+    app.UseMiddleware<ProductionsExceptionHandlerMiddleware>();
+}
 
 app.MapControllers();
 
