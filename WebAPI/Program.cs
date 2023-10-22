@@ -1,5 +1,6 @@
 using Application;
 using Application.Commons;
+using Application.Commons.DataAccess;
 using Application.Users.Features.CreateUser.Services.ImageService;
 using Application.Users.Features.CreateUser.Services.TokenService;
 using FluentValidation;
@@ -18,8 +19,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresqlDocker")));
+builder.Services.AddDbContext<HomederContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresqlDocker")));
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
 builder.Services.AddScoped<InputActionFilter>();
