@@ -1,6 +1,7 @@
 ﻿using Application.Commons;
 using Application.Regions.Entities;
 using Application.Users.Entities;
+using Application.Users.Enums;
 using FluentValidation;
 
 namespace Application.Users.Features.UpdateUser;
@@ -75,13 +76,15 @@ public class UpdateUserInputValidator : AbstractValidator<UpdateUserInput>
         return _ctx.GetEntity<Citizenship>().Any(x => x.Id == citizenship);
     }
 
-    private bool BeValidUserType(int userType)
+    private bool BeValidUserType(UserTypeEnum userTypeEnum)
     {
-        return _ctx.GetEntity<UserType>().Any(x => x.Id == userType);
+        var type = userTypeEnum.GetType();
+        return type.IsEnum && Enum.IsDefined(type, userTypeEnum) && userTypeEnum != UserTypeEnum.None;
     }
 
-    private bool BeValidUserRole(int userRole)
+    private bool BeValidUserRole(UserRoleEnum userRoleEnum)
     {
-        return _ctx.GetEntity<UserRole>().Any(x => x.Id == userRole);
+        var type = userRoleEnum.GetType();
+        return type.IsEnum && Enum.IsDefined(type, userRoleEnum) && userRoleEnum != UserRoleEnum.None;
     }
 }

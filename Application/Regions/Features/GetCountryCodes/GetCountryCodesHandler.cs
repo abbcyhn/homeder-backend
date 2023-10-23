@@ -4,7 +4,7 @@ using Application.Regions.Entities;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Regions.Features.GetAllCountryCodes;
+namespace Application.Regions.Features.GetCountryCodes;
 
 public class GetAllCountryCodesHandler : BaseHandler<GetAllCountryCodesRequest, IdValueListResponse>
 {

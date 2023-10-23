@@ -6,8 +6,8 @@ using Application.Users.Features.CreateUser.Services.TokenService;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.ActionFilters;
 using WebAPI.Extensions;
+using WebAPI.Filters;
 using WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,7 +43,7 @@ builder.Services.AddSingleton<IImageService, ImageService>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
 
 
-builder.Services.AddSwaggerConfigs();
+builder.Services.AddSwaggerDocumentation();
 
 var app = builder.Build();
 
@@ -51,8 +51,7 @@ app.UseAuthentication();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDocumentation();
 }
 
 app.MapHealthChecks("/health-check");

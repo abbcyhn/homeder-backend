@@ -1,4 +1,6 @@
 ﻿using Application.Commons.Mediator;
+using Application.Users.Enums;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Users.Features.UpdateUser;
 
@@ -6,14 +8,15 @@ public record UpdateUserInput : BaseInput
 {
     public string Name { get; set; }
     public string Surname { get; set; }
+    [SwaggerSchema(Format = "date")]
     public DateTime Birthdate { get; set; }
     public string Email { get; set; }
     public int PhoneCountryCode { get; set; }
     public string PhoneNumber { get; set; }
     public int Citizenship { get; set; }
     public int NumberOfPeople { get; set; }
-    public int UserType { get; set; }
-    public int UserRole { get; set; }
+    public UserTypeEnum UserType { get; set; }
+    public UserRoleEnum UserRole { get; set; }
     public bool IsSmoker { get; set; }
     public bool HasChild { get; set; }
     public bool HasPet { get; set; }

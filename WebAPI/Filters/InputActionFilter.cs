@@ -1,7 +1,7 @@
 using Application.Commons.Mediator;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace WebAPI.ActionFilters;
+namespace WebAPI.Filters;
 
 public class InputActionFilter : IAsyncActionFilter
 {
