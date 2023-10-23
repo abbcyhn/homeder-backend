@@ -8,11 +8,13 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.ActionFilters;
 using WebAPI.Extensions;
+using WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddTransient<DeveloperExceptionHandlerMiddleware>();
+builder.Services.AddTransient<ProductionsExceptionHandlerMiddleware>();
 builder.Services.AddHealthChecks();
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -35,11 +37,11 @@ builder.Services.AddAutoMapper(typeof(DependencyInjection).Assembly);
 var authSetting = new AuthSetting();
 builder.Configuration.GetSection(nameof(authSetting)).Bind(authSetting);
 builder.Services.Configure<AuthSetting>(builder.Configuration.GetSection(nameof(authSetting)));
+builder.Services.AddAuthenticationConfigs(authSetting);
 
 builder.Services.AddSingleton<IImageService, ImageService>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
 
-builder.Services.AddAuthenticationConfigs(authSetting);
 
 builder.Services.AddSwaggerConfigs();
 
@@ -58,6 +60,16 @@ app.MapHealthChecks("/health-check");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseMiddleware<DeveloperExceptionHandlerMiddleware>();
+}
+
+if (app.Environment.IsProduction())
+{
+    app.UseMiddleware<ProductionsExceptionHandlerMiddleware>();
+}
 
 app.MapControllers();
 
