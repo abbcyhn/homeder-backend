@@ -1,14 +1,20 @@
+using Application.Commons.Helpers;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Users.Features.UpdateUserPhoto;
 
 public class UpdateUserPhotoInputValidator : AbstractValidator<UpdateUserPhotoInput>
 {
-    public UpdateUserPhotoInputValidator()
+    private readonly IStringLocalizer<LocalizationMessage> _localizer;
+
+    public UpdateUserPhotoInputValidator(IStringLocalizer<LocalizationMessage> localizer)
     {
+        _localizer = localizer;
+
         RuleFor(x => x.UserPhoto)
             .Cascade(CascadeMode.Stop)
-            .Must(BeValid).WithMessage("Given user photo is not valid");
+            .Must(BeValid).WithMessage(_localizer[LocalizationMessage.USER_PHOTO_INVALID].Value);
     }
 
     private bool BeValid(byte[] userPhoto)
