@@ -6,7 +6,7 @@ public class User : BaseEntity
 {
     public string Name { get; set; }
     public string Surname { get; set; }
-    public DateTime? Birthdate { get; set; }
+    public DateOnly? Birthdate { get; set; }
     public string? PhotoUrl { get; set; }
     public int IdRole { get; set; }
 
