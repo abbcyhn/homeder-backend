@@ -19,7 +19,7 @@ public class DeveloperExceptionHandlerMiddleware : IMiddleware
                     Status = StatusCodes.Status500InternalServerError,
                     Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
                     Title = e.Message,
-                    Detail = e.InnerException!.Message + Environment.NewLine + e.StackTrace,
+                    Detail = e.InnerException?.Message + Environment.NewLine + e?.StackTrace,
                 },
                 context
             );
