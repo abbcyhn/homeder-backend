@@ -1,5 +1,5 @@
 ﻿using Application.Commons;
-using Application.Commons.Helpers;
+using Application.Commons.Resources;
 using Application.Regions.Entities;
 using Application.Users.Enums;
 using FluentValidation;

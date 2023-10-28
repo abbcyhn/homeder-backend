@@ -1,4 +1,4 @@
-namespace Application.Commons.Helpers;
+namespace Application.Commons.Resources;
 
 public class LocalizationMessage
 {

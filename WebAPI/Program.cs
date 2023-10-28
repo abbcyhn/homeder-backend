@@ -15,8 +15,8 @@ using WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<DeveloperExceptionHandlerMiddleware>();
-builder.Services.AddTransient<ProductionsExceptionHandlerMiddleware>();
+builder.Services.AddTransient<DevExcHandlerMiddleware>();
+builder.Services.AddTransient<ProdExcHandlerMiddleware>();
 builder.Services.AddHealthChecks();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -85,12 +85,12 @@ app.UseRequestLocalization(localizeOptions.Value);
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseMiddleware<DeveloperExceptionHandlerMiddleware>();
+    app.UseMiddleware<DevExcHandlerMiddleware>();
 }
 
 if (app.Environment.IsProduction())
 {
-    app.UseMiddleware<ProductionsExceptionHandlerMiddleware>();
+    app.UseMiddleware<ProdExcHandlerMiddleware>();
 }
 
 app.MapControllers();
