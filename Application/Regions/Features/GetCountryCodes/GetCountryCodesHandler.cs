@@ -1,14 +1,16 @@
 ﻿using Application.Commons;
+using Application.Commons.Helpers;
 using Application.Commons.Mediator;
 using Application.Regions.Entities;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Regions.Features.GetCountryCodes;
 
 public class GetAllCountryCodesHandler : BaseHandler<GetAllCountryCodesRequest, IdValueListResponse>
 {
-    public GetAllCountryCodesHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
+    public GetAllCountryCodesHandler(IMapper mapper, AppDbContext ctx, IStringLocalizer<LocalizationMessage> localizer) : base(mapper, ctx, localizer)
     {
     }
 

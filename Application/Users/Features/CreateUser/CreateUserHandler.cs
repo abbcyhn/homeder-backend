@@ -1,4 +1,5 @@
 using Application.Commons;
+using Application.Commons.Helpers;
 using Application.Commons.Mediator;
 using Application.Users.Entities;
 using Application.Users.Features.CreateUser.Services.ImageService;
@@ -7,6 +8,7 @@ using Application.Users.Features.UpdateUserPhoto;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Users.Features.CreateUser;
 
@@ -16,7 +18,7 @@ public class CreateUserHandler : BaseHandler<CreateUserRequest, CreateUserRespon
     private readonly ITokenService _tokenService;
     private readonly IImageService _imageService;
 
-    public CreateUserHandler(AppDbContext ctx, IMapper mapper, ITokenService tokenService, IImageService imageService, IMediator mediator) : base (mapper, ctx)
+    public CreateUserHandler(AppDbContext ctx, IMapper mapper, ITokenService tokenService, IImageService imageService, IMediator mediator, IStringLocalizer<LocalizationMessage> localizer) : base(mapper, ctx, localizer)
     {
         _mediator = mediator;
         _tokenService = tokenService;

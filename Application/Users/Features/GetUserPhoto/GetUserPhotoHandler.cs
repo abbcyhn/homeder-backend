@@ -1,13 +1,14 @@
 using Application.Commons;
+using Application.Commons.Helpers;
 using Application.Commons.Mediator;
 using AutoMapper;
-using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Users.Features.GetUserPhoto;
 
 public class GetUserPhotoHandler : BaseHandler<GetUserPhotoRequest, GetUserPhotoResponse>
 {
-    public GetUserPhotoHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
+    public GetUserPhotoHandler(IMapper mapper, AppDbContext ctx, IStringLocalizer<LocalizationMessage> localizer) : base(mapper, ctx, localizer)
     {
     }
 

@@ -1,14 +1,16 @@
 using Application.Commons;
+using Application.Commons.Helpers;
 using Application.Commons.Mediator;
 using Application.Regions.Entities;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Users.Features.GetCitizenships;
 
 public class GetCitizenshipsHandler : BaseHandler<GetCitizenshipsRequest, IdValueListResponse>
 {
-    public GetCitizenshipsHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
+    public GetCitizenshipsHandler(IMapper mapper, AppDbContext ctx, IStringLocalizer<LocalizationMessage> localizer) : base(mapper, ctx, localizer)
     {
     }
 
