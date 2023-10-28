@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Helpers;
+namespace WebAPI.Middlewares;
 
 public static class ExceptionMiddlewareHelper
 {
