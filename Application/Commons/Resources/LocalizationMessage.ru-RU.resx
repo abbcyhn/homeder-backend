@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="TECHNICAL_ERROR" xml:space="preserve">
-    <value>Техническая ошибка</value>
+    <value>Произошла техническая ошибка</value>
     <comment/>
   </data>
   <data name="TOKEN_INVALID" xml:space="preserve">
-    <value>Данный токен недействителен</value>
+    <value>Токен недействителен</value>
     <comment/>
   </data>
   <data name="USER_ID_INVALID" xml:space="preserve">
-    <value>Указанный идентификатор пользователя недействителен</value>
+    <value>Идентификатор пользователя недействителен</value>
     <comment/>
   </data>
   <data name="USER_PHOTO_INVALID" xml:space="preserve">
-    <value>Указанная фотография пользователя недействительна.</value>
+    <value>Фото пользователя недействительно</value>
     <comment/>
   </data>
   <data name="USER_NAME_INVALID" xml:space="preserve">
@@ -142,55 +142,55 @@
     <comment/>
   </data>
   <data name="USER_SURNAME_INVALID" xml:space="preserve">
-    <value>Указанная фамилия не может быть пустой</value>
+    <value>Фамилия не может быть пустой</value>
     <comment/>
   </data>
   <data name="USER_SURNAME_MAXLEN_EXCEED" xml:space="preserve">
-    <value>Длина указанной фамилии не может превышать 255 символов</value>
+    <value>Длина фамилии не может превышать 255 символов</value>
     <comment/>
   </data>
   <data name="USER_BIRTHDATE_INVALID" xml:space="preserve">
-    <value>Указанная дата рождения недействительна</value>
+    <value>Дата рождения недействительна</value>
     <comment/>
   </data>
   <data name="USER_EMAIL_INVALID" xml:space="preserve">
-    <value>Указанный адрес электронной почты недействителен</value>
+    <value>Адрес электронной почты недействителен</value>
     <comment/>
   </data>
   <data name="USER_EMAIL_MAXLEN_EXCEED" xml:space="preserve">
-    <value>Длина указанного письма не может превышать 255 символов</value>
+    <value>Длина адреса электронной почты не может превышать 255 символов</value>
     <comment/>
   </data>
   <data name="USER_PHONE_MAXLEN_EXCEED" xml:space="preserve">
-    <value>Длина указанного номера телефона не может превышать 50 символов</value>
+    <value>Длина номера телефона не может превышать 50 символов</value>
     <comment/>
   </data>
   <data name="USER_PHONE_CODE_INVALID" xml:space="preserve">
-    <value>Указанный код страны телефона недействителен</value>
+    <value>Код страны телефона недействителен</value>
     <comment/>
   </data>
   <data name="USER_CITIZENSHIP_INVALID" xml:space="preserve">
-    <value>Данное гражданство недействительно</value>
+    <value>Выбранное гражданство неверно</value>
     <comment/>
   </data>
   <data name="NO_OF_PEOPLE_INVALID" xml:space="preserve">
-    <value>Указанное количество человек не может быть меньше 1</value>
+    <value>Количество человек не может быть меньше 1</value>
     <comment/>
   </data>
   <data name="USER_TYPE_INVALID" xml:space="preserve">
-    <value>Указанный тип пользователя недействителен</value>
+    <value>Тип пользователя недействителен</value>
     <comment/>
   </data>
   <data name="USER_ROLE_INVALID" xml:space="preserve">
-    <value>Указанная роль пользователя недействительна</value>
+    <value>Роль пользователя недействительна</value>
     <comment/>
   </data>
   <data name="COUNTRY_ID_INVALID" xml:space="preserve">
-    <value>Идентификатор страны недействителен</value>
+    <value>Выбранный код страны недействителен</value>
     <comment/>
   </data>
   <data name="COUNTRY_NOT_EXISTS" xml:space="preserve">
-    <value>Страна не существует</value>
+    <value>Выбранная страна не существует</value>
     <comment/>
   </data>
 </root>
