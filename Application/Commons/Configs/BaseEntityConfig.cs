@@ -11,10 +11,10 @@ public abstract class BaseEntityConfig<TEntity> : IEntityTypeConfiguration<TEnti
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id).ValueGeneratedOnAdd();
         builder.Property(e => e.CreatedBy).IsRequired();
-        builder.Property(e => e.CreateDate).IsRequired();
+        builder.Property(e => e.CreateDate).HasColumnType("timestamp with time zone").IsRequired();
         builder.Property(e => e.EditedBy);
-        builder.Property(e => e.EditDate);
+        builder.Property(e => e.EditDate).HasColumnType("timestamp with time zone");
         builder.Property(e => e.ArchivedBy);
-        builder.Property(e => e.ArchivedDate);
+        builder.Property(e => e.ArchivedDate).HasColumnType("timestamp with time zone");
     }
 }

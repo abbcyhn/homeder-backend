@@ -19,10 +19,10 @@ public class UpdateUserHandler : BaseHandler<UpdateUserRequest, UpdateUserRespon
             .Include(x => x.UserEmails)
             .Include(x => x.UserPhones)
             .FirstAsync(x => x.Id == request.UserId, cancellationToken);
-
+        
         user.Name = request.Name;
         user.Surname = request.Surname;
-        user.Birthdate = request.Birthdate;
+        user.Birthdate = new DateOnly(request.Birthdate.Year, request.Birthdate.Month, request.Birthdate.Day);
         user.IdRole = request.IdRole;
 
         user.UserDetail = new UserDetail
@@ -33,7 +33,8 @@ public class UpdateUserHandler : BaseHandler<UpdateUserRequest, UpdateUserRespon
             HasBankStatement = request.HasBankStatement,
             HasUmowaOkazionalny = request.HasUmowaOkazionalny,
             HasWorkContract = request.HasWorkContract,
-            HasWorkPermit = request.HasWorkPermit
+            HasWorkPermit = request.HasWorkPermit,
+            IdCitizenship = request.IdCitizenship
         };
 
         if (!string.IsNullOrEmpty(request.PhoneNumber))
