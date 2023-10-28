@@ -1,4 +1,5 @@
-﻿using Application.Commons.Mediator;
+﻿using System.Text.Json.Serialization;
+using Application.Commons.Mediator;
 using Application.Users.Enums;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -15,7 +16,9 @@ public record UpdateUserInput : BaseInput
     public string PhoneNumber { get; set; }
     public int Citizenship { get; set; }
     public int NumberOfPeople { get; set; }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public UserTypeEnum UserType { get; set; }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public UserRoleEnum UserRole { get; set; }
     public bool IsSmoker { get; set; }
     public bool HasChild { get; set; }
