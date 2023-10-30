@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebAPI.Helpers;
 
 namespace WebAPI.Middlewares;
 
-public class DeveloperExceptionHandlerMiddleware : IMiddleware
+public class DevExcHandlerMiddleware : IMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {

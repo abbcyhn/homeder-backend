@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Helpers;
 
 namespace WebAPI.Middlewares;
 
-public class ProductionsExceptionHandlerMiddleware : IMiddleware
+public class ProdExcHandlerMiddleware : IMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {

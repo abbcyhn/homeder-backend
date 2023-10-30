@@ -1,6 +1,6 @@
 using Application.Commons;
-using Application.Commons.Helpers;
 using Application.Commons.Mediator;
+using Application.Commons.Resources;
 using AutoMapper;
 using Microsoft.Extensions.Localization;
 
