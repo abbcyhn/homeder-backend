@@ -1,14 +1,16 @@
 ﻿using Application.Commons;
 using Application.Commons.Mediator;
+using Application.Commons.Resources;
 using Application.Users.Entities;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Users.Features.UpdateUser;
 
 public class UpdateUserHandler : BaseHandler<UpdateUserRequest, UpdateUserResponse>
 {
-    public UpdateUserHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
+    public UpdateUserHandler(IMapper mapper, AppDbContext ctx, IStringLocalizer<LocalizationMessage> localizer) : base(mapper, ctx, localizer)
     {
     }
 

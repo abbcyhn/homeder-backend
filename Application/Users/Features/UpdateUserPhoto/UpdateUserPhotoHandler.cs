@@ -1,13 +1,14 @@
 using Application.Commons;
 using Application.Commons.Mediator;
+using Application.Commons.Resources;
 using AutoMapper;
-using MediatR;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Users.Features.UpdateUserPhoto;
 
 public class UpdateUserPhotoHandler : BaseHandler<UpdateUserPhotoRequest, UpdateUserPhotoResponse>
 {
-    public UpdateUserPhotoHandler(IMapper mapper, AppDbContext ctx) : base(mapper, ctx)
+    public UpdateUserPhotoHandler(IMapper mapper, AppDbContext ctx, IStringLocalizer<LocalizationMessage> localizer) : base(mapper, ctx, localizer)
     {
     }
 

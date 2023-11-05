@@ -1,15 +1,15 @@
-using Application.Commons;
 using Application.Commons.DataAccess;
 using Application.Commons.Mediator;
+using Application.Commons.Resources;
 using Application.Regions.Entities;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Regions.Features.GetCountries;
 
 public class GetAllCountriesHandler : BaseHandler<GetCountriesRequest, IdValueListResponse>
 {
-    public GetAllCountriesHandler(IMapper mapper, IUnitOfWork uow) : base(mapper, uow)
+    public GetAllCountriesHandler(IMapper mapper, IUnitOfWork uow, IStringLocalizer<LocalizationMessage> localizer) : base(mapper, uow, localizer)
     {
     }
 
