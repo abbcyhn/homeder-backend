@@ -7,7 +7,7 @@ public record UpdateUserRequest : BaseRequest<UpdateUserResponse>
 {
     public string Name { get; set; }
     public string Surname { get; set; }
-    public DateTime Birthdate { get; set; }
+    public DateOnly Birthdate { get; set; }
     public string Email { get; set; }
     public int PhoneCountryCode { get; set; }
     public string PhoneNumber { get; set; }

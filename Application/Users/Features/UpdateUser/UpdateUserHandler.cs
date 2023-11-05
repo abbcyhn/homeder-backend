@@ -35,7 +35,8 @@ public class UpdateUserHandler : BaseHandler<UpdateUserRequest, UpdateUserRespon
             HasBankStatement = request.HasBankStatement,
             HasUmowaOkazionalny = request.HasUmowaOkazionalny,
             HasWorkContract = request.HasWorkContract,
-            HasWorkPermit = request.HasWorkPermit
+            HasWorkPermit = request.HasWorkPermit,
+            IdCitizenship = request.IdCitizenship
         };
 
         if (!string.IsNullOrEmpty(request.PhoneNumber))
