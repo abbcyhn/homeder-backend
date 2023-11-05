@@ -1,64 +1,67 @@
 ﻿using Application.Commons;
+using Application.Commons.Resources;
 using Application.Regions.Entities;
-using Application.Users.Entities;
 using Application.Users.Enums;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 
 namespace Application.Users.Features.UpdateUser;
 
 public class UpdateUserInputValidator : AbstractValidator<UpdateUserInput>
 {
     private readonly AppDbContext _ctx;
+    private readonly IStringLocalizer<LocalizationMessage> _localizer;
 
-    public UpdateUserInputValidator(AppDbContext ctx)
+    public UpdateUserInputValidator(AppDbContext ctx, IStringLocalizer<LocalizationMessage> localizer)
     {
         _ctx = ctx;
+        _localizer = localizer;
 
         RuleFor(t => t.Name)
             .Cascade(CascadeMode.Stop)
-            .NotEmpty().WithMessage("Given name can not be empty")
-            .MaximumLength(255).WithMessage("Given name length can not be more than 255 characters");
+            .NotEmpty().WithMessage(_localizer[LocalizationMessage.USER_NAME_INVALID].Value)
+            .MaximumLength(255).WithMessage(_localizer[LocalizationMessage.USER_NAME_MAXLEN_EXCEED].Value);
 
         RuleFor(t => t.Surname)
             .Cascade(CascadeMode.Stop)
-            .NotEmpty().WithMessage("Given surname can not be empty")
-            .MaximumLength(255).WithMessage("Given surname length can not be more than 255 characters");
+            .NotEmpty().WithMessage(_localizer[LocalizationMessage.USER_SURNAME_INVALID].Value)
+            .MaximumLength(255).WithMessage(_localizer[LocalizationMessage.USER_SURNAME_MAXLEN_EXCEED].Value);
 
         RuleFor(t => t.Birthdate)
             .Cascade(CascadeMode.Stop)
-            .NotNull().WithMessage("Given birthdate can not be empty")
-            .Must(BeAtLeast14YearsOld).WithMessage("Given birthdate is not valid");
+            .NotEmpty().WithMessage(_localizer[LocalizationMessage.USER_BIRTHDATE_INVALID].Value)
+            .Must(BeAtLeast14YearsOld).WithMessage(_localizer[LocalizationMessage.USER_BIRTHDATE_INVALID].Value);
 
         RuleFor(t => t.Email)
             .Cascade(CascadeMode.Stop)
-            .NotEmpty().WithMessage("Given email can not be empty")
-            .MaximumLength(255).WithMessage("Given email length can not be more than 255 characters")
-            .EmailAddress().WithMessage("Given email is not valid");
+            .NotEmpty().WithMessage(_localizer[LocalizationMessage.USER_EMAIL_INVALID].Value)
+            .EmailAddress().WithMessage(_localizer[LocalizationMessage.USER_EMAIL_INVALID].Value)
+            .MaximumLength(255).WithMessage(_localizer[LocalizationMessage.USER_EMAIL_MAXLEN_EXCEED].Value);
 
         RuleFor(t => t.PhoneNumber)
             .Cascade(CascadeMode.Stop)
-            .MaximumLength(50).WithMessage("Given surname length can not be more than 50 characters");
+            .MaximumLength(50).WithMessage(_localizer[LocalizationMessage.USER_PHONE_MAXLEN_EXCEED].Value);
 
         RuleFor(t => t.PhoneCountryCode)
             .Cascade(CascadeMode.Stop)
-            .Must(BeValidCountryCode).WithMessage("Given phone country code is not valid")
+            .Must(BeValidCountryCode).WithMessage(_localizer[LocalizationMessage.USER_PHONE_CODE_INVALID].Value)
             .When(t => !string.IsNullOrEmpty(t.PhoneNumber));
 
         RuleFor(t => t.Citizenship)
             .Cascade(CascadeMode.Stop)
-            .Must(BeValidCitizenship).WithMessage("Given citizenship is not valid");
+            .Must(BeValidCitizenship).WithMessage(_localizer[LocalizationMessage.USER_CITIZENSHIP_INVALID].Value);
 
         RuleFor(t => t.NumberOfPeople)
             .Cascade(CascadeMode.Stop)
-            .GreaterThanOrEqualTo(1).WithMessage("Given number of people can not be lower than 1");
+            .GreaterThanOrEqualTo(1).WithMessage(_localizer[LocalizationMessage.NO_OF_PEOPLE_INVALID].Value);
 
         RuleFor(t => t.UserType)
             .Cascade(CascadeMode.Stop)
-            .Must(BeValidUserType).WithMessage("Given user type is not valid");
+            .Must(BeValidUserType).WithMessage(_localizer[LocalizationMessage.USER_TYPE_INVALID].Value);
 
         RuleFor(t => t.UserRole)
             .Cascade(CascadeMode.Stop)
-            .Must(BeValidUserRole).WithMessage("Given user role is not valid");
+            .Must(BeValidUserRole).WithMessage(_localizer[LocalizationMessage.USER_ROLE_INVALID].Value);
     }
 
     private bool BeAtLeast14YearsOld(DateTime birthDate)
