@@ -1,3 +1,4 @@
+using Application.Apartments.Entities;
 using Application.Commons.Entities;
 
 namespace Application.Regions.Entities;
@@ -9,4 +10,5 @@ public class City : IdValueEntity
     public State State { get; set; }
 
     public ICollection<District> Districts { get; set; }
+    public ICollection<Apartment> Apartments { get; set; }
 }
