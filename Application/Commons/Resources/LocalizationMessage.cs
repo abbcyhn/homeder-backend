@@ -21,4 +21,5 @@ public class LocalizationMessage
     public const string USER_ROLE_INVALID = nameof(USER_ROLE_INVALID);
     public const string COUNTRY_ID_INVALID = nameof(COUNTRY_ID_INVALID);
     public const string COUNTRY_NOT_EXISTS = nameof(COUNTRY_NOT_EXISTS);
+    public const string COUNTRY_NAME_INVALID = nameof(COUNTRY_NAME_INVALID);
 }

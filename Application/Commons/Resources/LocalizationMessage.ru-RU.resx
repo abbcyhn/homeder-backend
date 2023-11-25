@@ -193,4 +193,7 @@
     <value>Выбранная страна не существует</value>
     <comment/>
   </data>
+  <data name="COUNTRY_NAME_INVALID" xml:space="preserve">
+    <value>Имя страны неверно</value>
+  </data>
 </root>
