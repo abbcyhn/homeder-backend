@@ -10,9 +10,9 @@ public class IdValueMapper : Profile
     {
         IdValueDtoMapper();
 
-        IdValueListResponseMapper();
-
         IdValueResponseMapper();
+
+        IdValueListResponseMapper();
     }
 
     private void IdValueDtoMapper()
@@ -30,6 +30,27 @@ public class IdValueMapper : Profile
         CreateMap<UserType, IdValueDto>();
         
         CreateMap<CountryCode, IdValueDto>();
+    }
+
+    private void IdValueResponseMapper()
+    {
+        CreateMap<Country, IdValueResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
+
+        CreateMap<State, IdValueResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
+
+        CreateMap<City, IdValueResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
+
+        CreateMap<District, IdValueResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
+
+        CreateMap<Citizenship, IdValueResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
+
+        CreateMap<UserType, IdValueResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }
 
     private void IdValueListResponseMapper()
@@ -56,24 +77,4 @@ public class IdValueMapper : Profile
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }
 
-    private void IdValueResponseMapper()
-    {
-        CreateMap<Country, IdValueResponse>()
-            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
-
-        CreateMap<State, IdValueResponse>()
-            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
-
-        CreateMap<City, IdValueResponse>()
-            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
-
-        CreateMap<District, IdValueResponse>()
-            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
-
-        CreateMap<Citizenship, IdValueResponse>()
-            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
-
-        CreateMap<UserType, IdValueResponse>()
-            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
-    }
 }
