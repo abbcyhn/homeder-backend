@@ -8,8 +8,6 @@ public class GetCountriesMapper : Profile
 {
     public GetCountriesMapper()
     {
-        CreateMap<Country, IdValueDto>();
-
         CreateMap<List<Country>, IdValueListResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }

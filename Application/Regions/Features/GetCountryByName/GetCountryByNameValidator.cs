@@ -1,6 +1,5 @@
 ﻿using Application.Commons;
 using Application.Commons.Resources;
-using Application.Regions.Entities;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
