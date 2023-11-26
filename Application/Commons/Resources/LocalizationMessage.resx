@@ -193,4 +193,7 @@
     <value>Country does not exist</value>
     <comment/>
   </data>
+  <data name="COUNTRY_NAME_INVALID" xml:space="preserve">
+    <value>Given county name is not valid</value>
+  </data>
 </root>
