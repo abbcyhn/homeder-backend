@@ -1,5 +1,4 @@
 ﻿using Application.Commons.Mediator;
-using MediatR;
 
 namespace Application.Users.Features.UpdateUser;
 

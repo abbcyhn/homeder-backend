@@ -196,4 +196,7 @@
   <data name="COUNTRY_NAME_INVALID" xml:space="preserve">
     <value>Given county name is not valid</value>
   </data>
+  <data name="STATE_NAME_INVALID" xml:space="preserve">
+    <value>State name is not valid</value>
+  </data>
 </root>
