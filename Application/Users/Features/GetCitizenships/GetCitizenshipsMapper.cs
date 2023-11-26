@@ -7,8 +7,5 @@ public class GetCitizenshipsMapper : Profile
     public GetCitizenshipsMapper()
     {
         CreateMap<GetCitizenshipsInput, GetCitizenshipsRequest>();
- 
-
-
     }
 }

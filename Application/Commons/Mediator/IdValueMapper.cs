@@ -28,26 +28,31 @@ public class IdValueMapper : Profile
         CreateMap<Citizenship, IdValueDto>();
         
         CreateMap<UserType, IdValueDto>();
+        
+        CreateMap<CountryCode, IdValueDto>();
     }
 
     private void IdValueListResponseMapper()
     {
-        CreateMap<Country, IdValueListResponse>()
+        CreateMap<List<Country>, IdValueListResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
 
-        CreateMap<State, IdValueListResponse>()
+        CreateMap<List<State>, IdValueListResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
 
-        CreateMap<City, IdValueListResponse>()
+        CreateMap<List<City>, IdValueListResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
 
-        CreateMap<District, IdValueListResponse>()
+        CreateMap<List<District>, IdValueListResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
 
-        CreateMap<Citizenship, IdValueListResponse>()
+        CreateMap<List<Citizenship>, IdValueListResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
 
-        CreateMap<UserType, IdValueListResponse>()
+        CreateMap<List<UserType>, IdValueListResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
+        
+        CreateMap<List<CountryCode>, IdValueListResponse>()
             .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }
 

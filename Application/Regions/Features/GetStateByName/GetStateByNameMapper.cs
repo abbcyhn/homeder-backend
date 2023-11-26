@@ -7,6 +7,5 @@ public class GetStateByNameMapper : Profile
     public GetStateByNameMapper() 
     {
         CreateMap<GetStateByNameInput, GetStateByNameRequest>();
-
     }
 }
