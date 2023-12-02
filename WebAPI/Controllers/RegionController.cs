@@ -4,6 +4,7 @@ using Application.Regions.Features.GetCountryById;
 using Application.Regions.Features.GetCountryByName;
 using Application.Regions.Features.GetCountryCodes;
 using Application.Regions.Features.GetStateByName;
+using Application.Regions.Features.GetStatesByCountryId;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,19 @@ public class RegionController : BaseController
     }
 
     [HttpGet("countries/{countryId:int}/states")]
-    public async Task<ActionResult<IdValueResponse>> GetStateByKey([FromQuery]GetStateByNameInput input, CancellationToken cancellationToken)
+    public async Task<ActionResult<IdValueResponse>> GetStates([FromQuery] GetStatesByCountryIdInput input,
+        CancellationToken cancellationToken)
+    {
+        var request = _mapper.Map<GetStatesByCountryIdRequest>(input);
+
+        var response = await _mediator.Send(request, cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpGet("countries/{countryId:int}/states/{stateName}")]
+    public async Task<ActionResult<IdValueResponse>> GetStateByKey([FromQuery] GetStateByNameInput input,
+        CancellationToken cancellationToken)
     {
         var request = _mapper.Map<GetStateByNameRequest>(input);
 
