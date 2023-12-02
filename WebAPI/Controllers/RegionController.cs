@@ -17,26 +17,6 @@ public class RegionController : BaseController
     public RegionController(IMapper mapper, IMediator mediator) : base(mapper, mediator)
     {
     }
-    
-    [HttpGet("states/{stateId}/cities")]
-    public async Task<ActionResult<IdValueResponse>> GetCitiesByStateId([FromRoute]GetCitiesByStateIdInput input, CancellationToken cancellationToken)
-    {
-        var request = _mapper.Map<GetCitiesByStateIdRequest>(input);
-
-        var response = await _mediator.Send(request, cancellationToken);
-
-        return Ok(response);
-    }
-
-    [HttpGet("countries/{countryId:int}/states")]
-    public async Task<ActionResult<IdValueResponse>> GetStateByKey([FromRoute]GetStateByNameInput input, CancellationToken cancellationToken)
-    {
-        var request = _mapper.Map<GetStateByNameRequest>(input);
-
-        var response = await _mediator.Send(request, cancellationToken);
-
-        return Ok(response);
-    }
 
     [HttpGet("countries/{countryName}")]
     public async Task<ActionResult<IdValueResponse>> GetCountryByName([FromRoute] GetCountryByNameInput input,
@@ -74,6 +54,26 @@ public class RegionController : BaseController
     public async Task<ActionResult<IdValueListResponse>> GetAllCountryCodes(CancellationToken cancellationToken)
     {
         var request = new GetAllCountryCodesRequest();
+
+        var response = await _mediator.Send(request, cancellationToken);
+
+        return Ok(response);
+    }
+    
+    [HttpGet("countries/{countryId:int}/states")]
+    public async Task<ActionResult<IdValueResponse>> GetStateByKey([FromRoute]GetStateByNameInput input, CancellationToken cancellationToken)
+    {
+        var request = _mapper.Map<GetStateByNameRequest>(input);
+
+        var response = await _mediator.Send(request, cancellationToken);
+
+        return Ok(response);
+    }
+    
+    [HttpGet("states/{stateId}/cities")]
+    public async Task<ActionResult<IdValueResponse>> GetCitiesByStateId([FromRoute]GetCitiesByStateIdInput input, CancellationToken cancellationToken)
+    {
+        var request = _mapper.Map<GetCitiesByStateIdRequest>(input);
 
         var response = await _mediator.Send(request, cancellationToken);
 
