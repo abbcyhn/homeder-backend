@@ -1,4 +1,5 @@
 using Application.Commons.Mediator;
+using Application.Regions.Features.GetCityByName;
 using Application.Regions.Features.GetCountries;
 using Application.Regions.Features.GetCountryById;
 using Application.Regions.Features.GetCountryByName;
@@ -17,8 +18,19 @@ public class RegionController : BaseController
     {
     }
 
+    [HttpGet("states/{stateId}/cities/{cityName}")]
+    public async Task<ActionResult<IdValueResponse>> GetCityByName([FromQuery] GetCityByNameInput input, CancellationToken cancellationToken)
+    {
+        var request = _mapper.Map<GetCityByNameRequest>(input);
+
+        var response = await _mediator.Send(request, cancellationToken);
+
+        return Ok(response);
+    }
+
     [HttpGet("countries/{countryId:int}/states")]
-    public async Task<ActionResult<IdValueResponse>> GetStateByKey([FromQuery]GetStateByNameInput input, CancellationToken cancellationToken)
+    public async Task<ActionResult<IdValueResponse>> GetStateByKey([FromQuery] GetStateByNameInput input,
+        CancellationToken cancellationToken)
     {
         var request = _mapper.Map<GetStateByNameRequest>(input);
 
