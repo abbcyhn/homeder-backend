@@ -19,7 +19,7 @@ public class RegionController : BaseController
     }
 
     [HttpGet("countries/{countryId:int}/states")]
-    public async Task<ActionResult<IdValueResponse>> GetStates([FromQuery] GetStatesByCountryIdInput input,
+    public async Task<ActionResult<IdValueResponse>> GetStates([FromRoute] GetStatesByCountryIdInput input,
         CancellationToken cancellationToken)
     {
         var request = _mapper.Map<GetStatesByCountryIdRequest>(input);
@@ -30,7 +30,7 @@ public class RegionController : BaseController
     }
 
     [HttpGet("countries/{countryId:int}/states/{stateName}")]
-    public async Task<ActionResult<IdValueResponse>> GetStateByName([FromQuery] GetStateByNameInput input,
+    public async Task<ActionResult<IdValueResponse>> GetStateByName([FromRoute] GetStateByNameInput input,
         CancellationToken cancellationToken)
     {
         var request = _mapper.Map<GetStateByNameRequest>(input);
