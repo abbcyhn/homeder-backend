@@ -30,7 +30,7 @@ public class RegionController : BaseController
     }
 
     [HttpGet("countries/{countryId:int}/states/{stateName}")]
-    public async Task<ActionResult<IdValueResponse>> GetStateByKey([FromQuery] GetStateByNameInput input,
+    public async Task<ActionResult<IdValueResponse>> GetStateByName([FromQuery] GetStateByNameInput input,
         CancellationToken cancellationToken)
     {
         var request = _mapper.Map<GetStateByNameRequest>(input);
