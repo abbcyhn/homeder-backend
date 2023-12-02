@@ -3,4 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Regions.Features.GetCitiesByStateId;
 
-public record GetCitiesByStateIdRequest(int StateId) : BaseRequest<IdValueListResponse>;
+public record GetCitiesByStateIdRequest : BaseRequest<IdValueListResponse>
+{
+    public int StateId { get; set; }
+};

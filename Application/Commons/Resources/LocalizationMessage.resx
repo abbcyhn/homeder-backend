@@ -199,4 +199,7 @@
   <data name="STATE_NAME_INVALID" xml:space="preserve">
     <value>State name is not valid</value>
   </data>
+  <data name="STATE_ID_INVALID" xml:space="preserve">
+    <value>State id is not valid</value>
+  </data>
 </root>

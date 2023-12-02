@@ -17,7 +17,7 @@ public class GetCitiesByStateIdValidator : AbstractValidator<GetCitiesByStateIdI
         _ctx = ctx;
 
         RuleFor(t => t.StateId)
-            .Must(BeExists).WithMessage(_localizer[LocalizationMessage.COUNTRY_ID_INVALID].Value);
+            .Must(BeExists).WithMessage(_localizer[LocalizationMessage.STATE_ID_INVALID].Value);
     }
 
     private bool BeExists(int stateId)
