@@ -5,6 +5,7 @@ using Application.Regions.Features.GetCountries;
 using Application.Regions.Features.GetCountryById;
 using Application.Regions.Features.GetCountryByName;
 using Application.Regions.Features.GetCountryCodes;
+using Application.Regions.Features.GetDistrictsByCity;
 using Application.Regions.Features.GetStateByName;
 using Application.Regions.Features.GetStatesByCountryId;
 using AutoMapper;
@@ -98,6 +99,16 @@ public class RegionController : BaseController
     public async Task<ActionResult<IdValueResponse>> GetCityByName([FromRoute] GetCityByNameInput input, CancellationToken cancellationToken)
     {
         var request = _mapper.Map<GetCityByNameRequest>(input);
+
+        var response = await _mediator.Send(request, cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpGet("cities/{cityId}/districts")]
+    public async Task<ActionResult<IdValueListResponse>> GetDistrictsByCityId([FromRoute] GetDistrictsByCityIdInput idInput, CancellationToken cancellationToken)
+    {
+        var request = _mapper.Map<GetDistrictsByCityIdRequest>(idInput);
 
         var response = await _mediator.Send(request, cancellationToken);
 
