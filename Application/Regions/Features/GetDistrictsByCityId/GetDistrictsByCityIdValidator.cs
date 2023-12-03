@@ -4,7 +4,7 @@ using Application.Regions.Entities;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace Application.Regions.Features.GetDistrictsByCity;
+namespace Application.Regions.Features.GetDistrictsByCityId;
 
 public class GetDistrictsByCityIdValidator : AbstractValidator<GetDistrictsByCityIdInput>
 {

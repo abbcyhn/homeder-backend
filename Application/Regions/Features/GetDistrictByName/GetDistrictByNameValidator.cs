@@ -17,7 +17,7 @@ public class GetDistrictByNameValidator : AbstractValidator<GetDistrictByNameInp
         _ctx = ctx;
 
         RuleFor(t => t.CityId)
-            .Must(BeExists).WithMessage(_localizer[LocalizationMessage.COUNTRY_ID_INVALID].Value);
+            .Must(BeExists).WithMessage(_localizer[LocalizationMessage.CITY_ID_INVALID].Value);
     }
 
     private bool BeExists(int cityId)

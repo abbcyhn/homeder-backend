@@ -2,5 +2,11 @@
 
 namespace Application.Regions.Features.GetDistrictByName;
 
-public record GetDistrictByNameInput([FromRoute(Name = "cityId")] int CityId,
-    [FromRoute(Name = "districtName")] string DistrictName);
+public record GetDistrictByNameInput
+{
+    [FromRoute(Name = "cityId")]
+    public int CityId { get; set; }
+
+    [FromRoute(Name = "districtName")]
+    public string DistrictName { get; set; }
+}
