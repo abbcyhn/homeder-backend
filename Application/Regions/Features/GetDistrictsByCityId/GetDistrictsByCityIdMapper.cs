@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Application.Regions.Features.GetDistrictsByCity;
+namespace Application.Regions.Features.GetDistrictsByCityId;
 
 public class GetDistrictsByCityIdMapper : Profile
 {

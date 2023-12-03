@@ -4,14 +4,14 @@ using Application.Regions.Entities;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace Application.Regions.Features.GetDistrictsByCityId;
+namespace Application.Regions.Features.GetDistrictByName;
 
-public class GetDistrictsByCityIdValidator : AbstractValidator<GetDistrictsByCityIdInput>
+public class GetDistrictByNameValidator : AbstractValidator<GetDistrictByNameInput>
 {
     private readonly AppDbContext _ctx;
     private readonly IStringLocalizer<LocalizationMessage> _localizer;
 
-    public GetDistrictsByCityIdValidator(AppDbContext ctx, IStringLocalizer<LocalizationMessage> localizer)
+    public GetDistrictByNameValidator(AppDbContext ctx, IStringLocalizer<LocalizationMessage> localizer)
     {
         _localizer = localizer;
         _ctx = ctx;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Application.Regions.Features.GetDistrictsByCity;
+namespace Application.Regions.Features.GetDistrictsByCityId;
 
 public record GetDistrictsByCityIdInput
 {
