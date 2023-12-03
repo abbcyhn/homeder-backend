@@ -6,7 +6,6 @@ public record GetStateByNameInput
 {
     [FromRoute(Name = "countryId")]
     public int CountryId { get; set; }
-    
-    [FromQuery(Name = "name")]
+    [FromRoute(Name = "stateName")]
     public string? StateName { get; set; }
 }

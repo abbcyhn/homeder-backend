@@ -201,4 +201,7 @@
     <value>State name is not valid</value>
     <comment/>
   </data>
+  <data name="STATE_ID_INVALID" xml:space="preserve">
+    <value>State id is not valid</value>
+  </data>
 </root>
