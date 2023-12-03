@@ -203,5 +203,10 @@
   </data>
   <data name="STATE_ID_INVALID" xml:space="preserve">
     <value>State id is not valid</value>
+    <comment/>
+  </data>
+  <data name="CITY_ID_INVALID" xml:space="preserve">
+    <value>City id is not valid</value>
+    <comment/>
   </data>
 </root>
