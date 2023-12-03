@@ -2,4 +2,8 @@
 
 namespace Application.Regions.Features.GetDistrictsByCity;
 
-public record GetDistrictsByCityIdInput([FromRoute] int CityId);
+public record GetDistrictsByCityIdInput
+{
+    [FromRoute(Name = "cityId")]
+    public int CityId { get; set; }
+}

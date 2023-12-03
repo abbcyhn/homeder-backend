@@ -6,7 +6,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Application.Regions.Features.GetDistrictsByCity;
 
-public class GetDistrictsByCityIdValidator : AbstractValidator<GetDistrictsByCityIdRequest>
+public class GetDistrictsByCityIdValidator : AbstractValidator<GetDistrictsByCityIdInput>
 {
     private readonly AppDbContext _ctx;
     private readonly IStringLocalizer<LocalizationMessage> _localizer;
@@ -17,7 +17,7 @@ public class GetDistrictsByCityIdValidator : AbstractValidator<GetDistrictsByCit
         _ctx = ctx;
 
         RuleFor(t => t.CityId)
-            .Must(BeExists).WithMessage(_localizer[LocalizationMessage.COUNTRY_ID_INVALID].Value);
+            .Must(BeExists).WithMessage(_localizer[LocalizationMessage.CITY_ID_INVALID].Value);
     }
 
     private bool BeExists(int cityId)
