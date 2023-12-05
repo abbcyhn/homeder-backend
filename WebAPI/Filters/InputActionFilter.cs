@@ -1,4 +1,5 @@
 using Application.Commons.Mediator;
+using Application.Commons.Resources;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace WebAPI.Filters;
@@ -9,11 +10,10 @@ public class InputActionFilter : IAsyncActionFilter
     {
         if (context.ActionArguments.TryGetValue("input", out var inputObj) && inputObj is BaseInput input)
         {
-            var userIdInfo = GetUserIdInfo(context);
+            input.SetUserId(GetUserId(context));
             input.SetHostUrl(GetHostUrl(context));
-            input.SetUserId(userIdInfo.Item1);
-            input.SetIsUserIdProvided(userIdInfo.Item2);
             input.SetLoggedUserId(GetLoggedUserId(context));
+            input.SetAcceptLanguage(GetAcceptLanguage(context));
         }
 
         await next();
@@ -30,18 +30,31 @@ public class InputActionFilter : IAsyncActionFilter
         return $"{request.Scheme}://{request.Host}{request.Path}{request.QueryString}";
     }
 
-    private (int, bool) GetUserIdInfo(ActionExecutingContext context)
+    private string GetAcceptLanguage(ActionExecutingContext context)
+    {
+        var httpContext = context?.HttpContext;
+        var request = httpContext?.Request;
+
+        if (request == null)
+            return string.Empty;
+
+        var acceptLanguage = request.GetTypedHeaders().AcceptLanguage;
+        string correctAcceptLanguage = SupportedCulture.GetCorrectAcceptLanguage(acceptLanguage);
+        return correctAcceptLanguage;
+    }
+
+    private int? GetUserId(ActionExecutingContext context)
     {
         var httpContext = context?.HttpContext;
         var request = httpContext?.Request;
         var routeValues = request?.RouteValues;
 
         if (routeValues == null || !routeValues.ContainsKey("userId"))
-            return (int.MinValue, false);
+            return null;
         
         routeValues.TryGetValue("userId", out var userIdObj);
         int userId = int.Parse(userIdObj.ToString());
-        return (userId, true);
+        return userId;
     }
 
     private int GetLoggedUserId(ActionExecutingContext context)

@@ -12,6 +12,7 @@ using Application.Regions.Features.GetStatesByCountryId;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Application.Regions.Features.GetLocationsBySearchText;
 
 namespace WebAPI.Controllers;
 
@@ -121,6 +122,17 @@ public class RegionController : BaseController
         CancellationToken cancellationToken)
     {
         var request = _mapper.Map<GetDistrictByNameRequest>(input);
+
+        var response = await _mediator.Send(request, cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpGet("locations")]
+    public async Task<ActionResult<IdValueListResponse>> GetLocations([FromQuery] GetLocationsBySearchTextInput input,
+        CancellationToken cancellationToken) 
+    {
+        var request = _mapper.Map<GetLocationsBySearchTextRequest>(input);
 
         var response = await _mediator.Send(request, cancellationToken);
 

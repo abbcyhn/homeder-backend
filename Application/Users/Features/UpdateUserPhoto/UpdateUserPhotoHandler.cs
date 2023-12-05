@@ -14,7 +14,7 @@ public class UpdateUserPhotoHandler : BaseHandler<UpdateUserPhotoRequest, Update
 
     public override async Task<UpdateUserPhotoResponse> Execute(UpdateUserPhotoRequest request, CancellationToken cancellationToken)
     {
-        string photoPath = GetPhotoPath(request.UserId);
+        string photoPath = GetPhotoPath(request.UserId.Value);
 
         await File.WriteAllBytesAsync(photoPath, request.UserPhoto, cancellationToken);
 
