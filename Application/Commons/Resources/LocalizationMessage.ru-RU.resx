@@ -193,4 +193,20 @@
     <value>Выбранная страна не существует</value>
     <comment/>
   </data>
+  <data name="COUNTRY_NAME_INVALID" xml:space="preserve">
+    <value>Имя страны неверно</value>
+    <comment/>
+  </data>
+  <data name="STATE_NAME_INVALID" xml:space="preserve">
+    <value>Название области неверно</value>
+    <comment/>
+  </data>
+  <data name="STATE_ID_INVALID" xml:space="preserve">
+    <value>Выбранный код области недейстивтелен</value>
+    <comment/>
+  </data>
+  <data name="CITY_ID_INVALID" xml:space="preserve">
+    <value>Выбранный код города недействителен</value>
+    <comment/>
+  </data>
 </root>
