@@ -49,7 +49,7 @@ builder.Services.Configure<MapSetting>(builder.Configuration.GetSection(nameof(m
 
 builder.Services.AddSingleton<IImageService, ImageService>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
-builder.Services.AddSingleton<IGoogleMapAutocompleteService, GoogleMapAutocompleteService>();
+builder.Services.AddSingleton<IMapService, GoogleMapService>();
 
 builder.Services.AddLocalization();
 builder.Services.Configure<RequestLocalizationOptions>(

@@ -5,16 +5,16 @@ using Microsoft.Extensions.Options;
 
 namespace Application.Regions.Features.GetLocationsBySearchText.Services;
 
-public class GoogleMapAutocompleteService : IGoogleMapAutocompleteService
+public class GoogleMapService : IMapService
 {
     private readonly MapSetting _mapSetting;
 
-    public GoogleMapAutocompleteService(IOptions<MapSetting> mapSetting)
+    public GoogleMapService(IOptions<MapSetting> mapSetting)
     {
         _mapSetting = mapSetting.Value;
     }
 
-    public async Task<GoogleMapIdValueList> Search(string searchText, string acceptLanguage, 
+    public async Task<LocationIdValueList> SearchLocations(string searchText, string acceptLanguage, 
         CancellationToken cancellationToken)
     {
         using HttpClient httpClient = new();
@@ -29,7 +29,7 @@ public class GoogleMapAutocompleteService : IGoogleMapAutocompleteService
             if (response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync(cancellationToken);
-                return JsonSerializer.Deserialize<GoogleMapIdValueList>(content);
+                return JsonSerializer.Deserialize<LocationIdValueList>(content);
             }
 
             throw new Exception($"Failed to fetch the autocomplete list. Status code: {response.StatusCode}");

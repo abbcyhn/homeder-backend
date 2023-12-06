@@ -3,7 +3,7 @@ using Application.Commons.Mediator;
 
 namespace Application.Regions.Features.GetLocationsBySearchText.Services;
 
-public record GoogleMapIdValue
+public record LocationIdValue
 {
     [JsonPropertyName("place_id")]
     public string Id { get; set; }
@@ -12,8 +12,8 @@ public record GoogleMapIdValue
     public string Value { get; set; }
 }
 
-public record GoogleMapIdValueList : BaseResponse
+public record LocationIdValueList : BaseResponse
 {
     [JsonPropertyName("predictions")]
-    public List<GoogleMapIdValue> Data { get; set; }
+    public List<LocationIdValue> Data { get; set; }
 }
