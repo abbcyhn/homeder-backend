@@ -8,8 +8,6 @@ public class UpdateUserMapper : Profile
     public UpdateUserMapper()
     {
         CreateMap<UpdateUserInput, UpdateUserRequest>()
-            .ForMember(d => d.Birthdate,
-                o => o.MapFrom(s => new DateOnly(s.Birthdate.Year, s.Birthdate.Month, s.Birthdate.Day)))
             .ForMember(d => d.IdUserType, o => o.MapFrom(s => s.UserType))
             .ForMember(d => d.IdCitizenship, o => o.MapFrom(s => s.Citizenship))
             .ForMember(d => d.IdRole, o => o.MapFrom(s => s.UserRole));

@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Application.Commons.Mediator;
 using Application.Users.Enums;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Users.Features.UpdateUser;
 
@@ -9,8 +8,7 @@ public record UpdateUserInput : BaseInput
 {
     public string Name { get; set; }
     public string Surname { get; set; }
-    [SwaggerSchema(Format = "date")]
-    public DateTime Birthdate { get; set; }
+    public DateOnly Birthdate { get; set; }
     public string Email { get; set; }
     public int PhoneCountryCode { get; set; }
     public string PhoneNumber { get; set; }
