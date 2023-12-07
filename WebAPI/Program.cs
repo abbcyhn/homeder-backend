@@ -2,7 +2,7 @@ using Application;
 using Application.Commons;
 using Application.Commons.DataAccess;
 using Application.Commons.Resources;
-using Application.Regions.Features.GetLocationsBySearchText.Services;
+using Application.Commons.Services.MapService;
 using Application.Users.Features.CreateUser.Services.ImageService;
 using Application.Users.Features.CreateUser.Services.TokenService;
 using FluentValidation;

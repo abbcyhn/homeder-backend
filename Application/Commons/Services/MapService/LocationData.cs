@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Application.Commons.Mediator;
 
-namespace Application.Regions.Features.GetLocationsBySearchText.Services;
+namespace Application.Commons.Services.MapService;
 
 public record LocationIdValue
 {

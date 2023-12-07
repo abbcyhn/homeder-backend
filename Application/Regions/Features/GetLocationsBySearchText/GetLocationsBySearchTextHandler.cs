@@ -1,7 +1,7 @@
 using Application.Commons;
 using Application.Commons.Mediator;
 using Application.Commons.Resources;
-using Application.Regions.Features.GetLocationsBySearchText.Services;
+using Application.Commons.Services.MapService;
 using AutoMapper;
 using Microsoft.Extensions.Localization;
 

@@ -1,4 +1,4 @@
-using Application.Regions.Features.GetLocationsBySearchText.Services;
+using Application.Commons.Services.MapService;
 using AutoMapper;
 
 namespace Application.Regions.Features.GetLocationsBySearchText;

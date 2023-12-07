@@ -1,4 +1,4 @@
-namespace Application.Regions.Features.GetLocationsBySearchText.Services;
+namespace Application.Commons.Services.MapService;
 
 public class MapSetting
 {

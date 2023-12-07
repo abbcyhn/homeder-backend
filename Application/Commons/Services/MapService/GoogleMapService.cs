@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using Microsoft.Extensions.Options;
 
-namespace Application.Regions.Features.GetLocationsBySearchText.Services;
+namespace Application.Commons.Services.MapService;
 
 public class GoogleMapService : IMapService
 {
