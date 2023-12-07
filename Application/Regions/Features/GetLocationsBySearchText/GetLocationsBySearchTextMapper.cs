@@ -9,8 +9,8 @@ public class GetLocationsBySearchTextMapper : Profile
     {
         CreateMap<GetLocationsBySearchTextInput, GetLocationsBySearchTextRequest>();
 
-        CreateMap<LocationIdValue, GetLocationsBySearchTextIdValueDto>();
+        CreateMap<LocationDataIdValue, GetLocationsBySearchTextIdValueDto>();
 
-        CreateMap<LocationIdValueList, GetLocationsBySearchTextResponse>();
+        CreateMap<LocationDataIdValueList, GetLocationsBySearchTextResponse>();
     }
 }

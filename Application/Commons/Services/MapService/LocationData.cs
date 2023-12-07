@@ -3,7 +3,7 @@ using Application.Commons.Mediator;
 
 namespace Application.Commons.Services.MapService;
 
-public record LocationIdValue
+public record LocationDataIdValue
 {
     [JsonPropertyName("place_id")]
     public string Id { get; set; }
@@ -12,8 +12,8 @@ public record LocationIdValue
     public string Value { get; set; }
 }
 
-public record LocationIdValueList : BaseResponse
+public record LocationDataIdValueList : BaseResponse
 {
     [JsonPropertyName("predictions")]
-    public List<LocationIdValue> Data { get; set; }
+    public List<LocationDataIdValue> Data { get; set; }
 }

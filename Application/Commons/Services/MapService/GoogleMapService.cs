@@ -14,7 +14,7 @@ public class GoogleMapService : IMapService
         _mapSetting = mapSetting.Value;
     }
 
-    public async Task<LocationIdValueList> SearchLocations(string searchText, string acceptLanguage, 
+    public async Task<LocationDataIdValueList> SearchLocations(string searchText, string acceptLanguage, 
         CancellationToken cancellationToken)
     {
         using HttpClient httpClient = new();
@@ -29,7 +29,7 @@ public class GoogleMapService : IMapService
             if (response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync(cancellationToken);
-                return JsonSerializer.Deserialize<LocationIdValueList>(content);
+                return JsonSerializer.Deserialize<LocationDataIdValueList>(content);
             }
 
             throw new Exception($"Failed to fetch the autocomplete list. Status code: {response.StatusCode}");
