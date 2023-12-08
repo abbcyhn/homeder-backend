@@ -1,9 +1,8 @@
 using System.Text.Json.Serialization;
-using Application.Commons.Mediator;
 
 namespace Application.Commons.Services.MapService;
 
-public record LocationDataIdValue
+public record LocationData
 {
     [JsonPropertyName("place_id")]
     public string Id { get; set; }
@@ -12,8 +11,8 @@ public record LocationDataIdValue
     public string Value { get; set; }
 }
 
-public record LocationDataIdValueList : BaseResponse
+public record LocationDataRoot
 {
     [JsonPropertyName("predictions")]
-    public List<LocationDataIdValue> Data { get; set; }
+    public List<LocationData> Data { get; set; }
 }

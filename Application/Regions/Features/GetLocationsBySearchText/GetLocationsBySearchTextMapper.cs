@@ -9,8 +9,9 @@ public class GetLocationsBySearchTextMapper : Profile
     {
         CreateMap<GetLocationsBySearchTextInput, GetLocationsBySearchTextRequest>();
 
-        CreateMap<LocationDataIdValue, GetLocationsBySearchTextIdValueDto>();
+        CreateMap<LocationData, GetLocationsBySearchTextIdValueDto>();
 
-        CreateMap<LocationDataIdValueList, GetLocationsBySearchTextResponse>();
+        CreateMap<List<LocationData>, GetLocationsBySearchTextResponse>()
+            .ForMember(dest => dest.Data, opt => opt.MapFrom(src => src));
     }
 }

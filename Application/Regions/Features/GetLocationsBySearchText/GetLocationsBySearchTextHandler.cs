@@ -23,9 +23,8 @@ public class GetLocationsBySearchTextHandler : BaseHandler<GetLocationsBySearchT
     public override async Task<GetLocationsBySearchTextResponse> Execute(GetLocationsBySearchTextRequest request, 
         CancellationToken cancellationToken)
     {
-        var googleMapListResponse = await _mapService
-            .SearchLocations(request.SearchText, request.AcceptLanguage, cancellationToken);
+        var locations = await _mapService.GetLocations(request.SearchText, request.AcceptLanguage, cancellationToken);
         
-        return _mapper.Map<GetLocationsBySearchTextResponse>(googleMapListResponse);
+        return _mapper.Map<GetLocationsBySearchTextResponse>(locations);
     }
 }
