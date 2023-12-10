@@ -209,4 +209,8 @@
     <value>Выбранный код города недействителен</value>
     <comment/>
   </data>
+  <data name="SEARCH_TEXT_INVALID" xml:space="preserve">
+    <value>Текст для поиска не может быть пустым</value>
+    <comment/>
+  </data>
 </root>

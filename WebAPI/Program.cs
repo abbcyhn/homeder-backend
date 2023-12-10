@@ -1,7 +1,8 @@
-using System.Globalization;
 using Application;
 using Application.Commons;
 using Application.Commons.DataAccess;
+using Application.Commons.Resources;
+using Application.Commons.Services.MapService;
 using Application.Users.Features.CreateUser.Services.ImageService;
 using Application.Users.Features.CreateUser.Services.TokenService;
 using FluentValidation;
@@ -42,21 +43,19 @@ builder.Configuration.GetSection(nameof(authSetting)).Bind(authSetting);
 builder.Services.Configure<AuthSetting>(builder.Configuration.GetSection(nameof(authSetting)));
 builder.Services.AddAuthenticationConfigs(authSetting);
 
+var mapSetting = new MapSetting();
+builder.Configuration.GetSection(nameof(mapSetting)).Bind(mapSetting);
+builder.Services.Configure<MapSetting>(builder.Configuration.GetSection(nameof(mapSetting)));
+
 builder.Services.AddSingleton<IImageService, ImageService>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddSingleton<IMapService, GoogleMapService>();
 
 builder.Services.AddLocalization();
 builder.Services.Configure<RequestLocalizationOptions>(
     options =>
     {
-        var supportedCultures = new List<CultureInfo>
-        {
-            new("en-US"),
-            new("ru-RU"),
-            new("pl-PL"),
-            new("et-EE")
-        };
-
+        var supportedCultures = SupportedCulture.GetSupportedCultures();
         options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
         options.SupportedCultures = supportedCultures;
         options.SupportedUICultures = supportedCultures;

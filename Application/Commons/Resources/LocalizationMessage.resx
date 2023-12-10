@@ -209,4 +209,8 @@
     <value>City id is not valid</value>
     <comment/>
   </data>
+  <data name="SEARCH_TEXT_INVALID" xml:space="preserve">
+    <value>Given search text can not be empty</value>
+    <comment/>
+  </data>
 </root>
