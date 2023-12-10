@@ -1,7 +1,7 @@
 using Application.Commons;
 using Application.Commons.Mediator;
 using Application.Commons.Resources;
-//using Application.Commons.Services.MapService;
+using Application.Commons.Services.MapService;
 using Application.Regions.Features.GetCityByName;
 using Application.Regions.Features.GetCountryByName;
 using Application.Regions.Features.GetDistrictByName;
@@ -15,24 +15,23 @@ namespace Application.Regions.Features.GetLocationById;
 public class GetLocationByIdHandler : BaseHandler<GetLocationByIdRequest, GetLocationByIdResponse>
 {
     private readonly IMediator _mediator;
-    //private readonly IMapService _mapService;
+    private readonly IMapService _mapService;
 
     public GetLocationByIdHandler(IMapper mapper, 
         AppDbContext ctx,
         IMediator mediator,
-        //IMapService mapService,
+        IMapService mapService,
         IStringLocalizer<LocalizationMessage> localizer)
         : base(mapper, ctx, localizer) 
         {
             _mediator = mediator;
-            //_mapService = mapService;
+            _mapService = mapService;
         }
 
     public override async Task<GetLocationByIdResponse> Execute(GetLocationByIdRequest request, 
         CancellationToken cancellationToken)
     {
-        //var location = await _mapService.GetLocation(request.LocationId, cancellationToken);
-        var location = new LocationDetailData();
+        var location = await _mapService.GetLocation(request.LocationId, cancellationToken);
 
         var country = await _mediator.Send(GetCountryRequest(location), cancellationToken);
         var state = await _mediator.Send(GetStateRequest(location, country), cancellationToken);

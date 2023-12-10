@@ -1,5 +1,5 @@
 using Application.Commons.Mediator;
-//using Application.Commons.Services.MapService;
+using Application.Commons.Services.MapService;
 using AutoMapper;
 
 namespace Application.Regions.Features.GetLocationById;

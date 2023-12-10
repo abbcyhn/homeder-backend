@@ -139,4 +139,15 @@ public class RegionController : BaseController
 
         return Ok(response);
     }
+
+    [HttpGet("locations/{locationId}")]
+    public async Task<ActionResult<IdValueResponse>> GetLocationById([FromRoute] GetLocationByIdInput input,
+        CancellationToken cancellationToken)
+    {
+        var request = _mapper.Map<GetLocationByIdRequest>(input);
+
+        var response = await _mediator.Send(request, cancellationToken);
+
+        return Ok(response);
+    }
 }
