@@ -213,4 +213,7 @@
     <value>Текст для поиска не может быть пустым</value>
     <comment/>
   </data>
+  <data name="CITY_NAME_INVALID" xml:space="preserve">
+    <value>Имя города неверно</value>
+  </data>
 </root>

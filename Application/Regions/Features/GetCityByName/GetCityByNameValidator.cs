@@ -18,6 +18,9 @@ public class GetCityByNameValidator : AbstractValidator<GetCityByNameInput>
 
         RuleFor(t => t.StateId)
             .Must(BeExists).WithMessage(_localizer[LocalizationMessage.STATE_ID_INVALID].Value);
+        
+        RuleFor(t => t.CityName)
+            .NotNull().WithMessage(_localizer[LocalizationMessage.CITY_NAME_INVALID].Value);
     }
 
     private bool BeExists(int stateId)

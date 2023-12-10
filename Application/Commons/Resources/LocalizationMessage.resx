@@ -213,4 +213,7 @@
     <value>Given search text can not be empty</value>
     <comment/>
   </data>
+  <data name="CITY_NAME_INVALID" xml:space="preserve">
+    <value>City name is not valid</value>
+  </data>
 </root>

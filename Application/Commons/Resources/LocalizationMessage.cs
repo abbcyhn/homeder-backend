@@ -25,5 +25,6 @@ public class LocalizationMessage
     public const string STATE_NAME_INVALID = nameof(STATE_NAME_INVALID);
     public const string STATE_ID_INVALID = nameof(STATE_ID_INVALID);
     public const string CITY_ID_INVALID = nameof(CITY_ID_INVALID);
+    public const string CITY_NAME_INVALID = nameof(CITY_NAME_INVALID);
     public const string SEARCH_TEXT_INVALID = nameof(SEARCH_TEXT_INVALID);
 }
