@@ -2,17 +2,17 @@ namespace Application.Commons.Mediator;
 
 public record BaseInput
 {
-    private int _userId;
+    private int? _userId;
     private int _loggedUserId;
     private string _hostUrl;
-    private bool _isUserIdProvided;
+    private string _acceptLanguage;
 
-    public int GetUserId() 
+    public int? GetUserId() 
     {
         return _userId;
     }
 
-    public void SetUserId(int userId)
+    public void SetUserId(int? userId)
     {
         _userId = userId;
     }
@@ -37,13 +37,13 @@ public record BaseInput
         _hostUrl = hostUrl;
     }
 
-    public bool IsUserIdProvided()
+    public string GetAcceptLanguage()
     { 
-        return _isUserIdProvided;
+        return _acceptLanguage;
     }
 
-    public void SetIsUserIdProvided(bool isUserIdProvided)
+    public void SetAcceptLanguage(string acceptLanguage)
     {
-        _isUserIdProvided = isUserIdProvided;
+        _acceptLanguage = acceptLanguage;
     }
 }

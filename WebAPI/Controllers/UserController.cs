@@ -19,8 +19,8 @@ public class UserController : BaseController
     {
     }
 
-    [HttpPost]
     [AllowAnonymous]
+    [HttpPost("/api/login")]
     public async Task<ActionResult<string>> CreateUser([FromBody] CreateUserInput input, CancellationToken cancellationToken)
     {
         var request = _mapper.Map<CreateUserRequest>(input);

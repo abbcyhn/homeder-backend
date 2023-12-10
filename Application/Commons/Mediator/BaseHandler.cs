@@ -31,7 +31,7 @@ public abstract class BaseHandler<TRequest, TResponse> : IRequestHandler<TReques
 
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        if (request.IsUserIdProvided && request.UserId != 0 && request.UserId != request.LoggedUserId) 
+        if (request.UserId != null && request.UserId != request.LoggedUserId) 
             throw new UnauthorizedAccessException(_localizer[LocalizationMessage.USER_ID_INVALID].Value);
 
         return await Execute(request, cancellationToken);

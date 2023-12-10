@@ -64,7 +64,7 @@ public class UpdateUserInputValidator : AbstractValidator<UpdateUserInput>
             .Must(BeValidUserRole).WithMessage(_localizer[LocalizationMessage.USER_ROLE_INVALID].Value);
     }
 
-    private bool BeAtLeast14YearsOld(DateTime birthDate)
+    private bool BeAtLeast14YearsOld(DateOnly birthDate)
     {
         return (DateTime.Now.Year - birthDate.Year) >= 14;
     }
