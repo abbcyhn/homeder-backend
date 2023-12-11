@@ -12,15 +12,21 @@ using Microsoft.Extensions.Localization;
 
 namespace Application.Regions.Features.GetLocationById;
 
-public class GetLocationByIdHandler(IMapper mapper,
+public class GetLocationByIdHandler : BaseHandler<GetLocationByIdRequest, GetLocationByIdResponse>
+{
+    private readonly IMediator _mediator;
+    private readonly IMapService _mapService;
+
+    public GetLocationByIdHandler(IMapper mapper, 
         AppDbContext ctx,
         IMediator mediator,
         IMapService mapService,
         IStringLocalizer<LocalizationMessage> localizer)
-    : BaseHandler<GetLocationByIdRequest, GetLocationByIdResponse>(mapper, ctx, localizer)
-{
-    private readonly IMediator _mediator = mediator;
-    private readonly IMapService _mapService = mapService;
+        : base(mapper, ctx, localizer) 
+        {
+            _mediator = mediator;
+            _mapService = mapService;
+        }
 
     public override async Task<GetLocationByIdResponse> Execute(GetLocationByIdRequest request, 
         CancellationToken cancellationToken)
