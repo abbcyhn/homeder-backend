@@ -19,15 +19,18 @@ public class GetLocationByIdHandler(IMapper mapper,
         IStringLocalizer<LocalizationMessage> localizer)
     : BaseHandler<GetLocationByIdRequest, GetLocationByIdResponse>(mapper, ctx, localizer)
 {
+    private readonly IMediator _mediator = mediator;
+    private readonly IMapService _mapService = mapService;
+
     public override async Task<GetLocationByIdResponse> Execute(GetLocationByIdRequest request, 
         CancellationToken cancellationToken)
     {
-        var location = await mapService.GetLocation(request.LocationId, cancellationToken);
+        var location = await _mapService.GetLocation(request.LocationId, cancellationToken);
 
-        var country = await mediator.Send(GetCountryRequest(location), cancellationToken);
-        var state = await mediator.Send(GetStateRequest(location, country), cancellationToken);
-        var city = await mediator.Send(GetCityRequest(location, state), cancellationToken);
-        var district = await mediator.Send(GetDistrictRequest(location, city), cancellationToken);
+        var country = await _mediator.Send(GetCountryRequest(location), cancellationToken);
+        var state = await _mediator.Send(GetStateRequest(location, country), cancellationToken);
+        var city = await _mediator.Send(GetCityRequest(location, state), cancellationToken);
+        var district = await _mediator.Send(GetDistrictRequest(location, city), cancellationToken);
 
         var tuple = Tuple.Create(country, state, city, district, location);
         return _mapper.Map<GetLocationByIdResponse>(tuple);
