@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /.idea/.idea.HomederBackend/.idea
 /WebAPI/logs.txt
 /WebAPI/Photos
+prod_secrets.env
