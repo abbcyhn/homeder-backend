@@ -20,5 +20,5 @@ docker build -t homeder-backend:latest .
 ```
 
 ```bash
-docker run -d -p 80:80 --name homeder-backend homeder-backend:latest
+docker run -d -p 8080:8080 --add-host=host.docker.internal:host-gateway --env-file prod_secrets.env --name homeder-backend homeder-backend:latest
 ```
